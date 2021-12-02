@@ -1,0 +1,1 @@
+import{_ as e,c as a,o as r,f as n}from"./app.82084a0b.js";const t='{"title":"Reference","description":"","frontmatter":{},"relativePath":"learns/index.md","lastUpdated":1638452551944}',s={},i=[n('',1)];var o=e(s,[["render",function(e,n,t,s,o,d){return r(),a("div",null,i)}]]);export{t as __pageData,o as default};

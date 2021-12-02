@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as l,f as t}from"./app.82084a0b.js";const e='{"title":"Utils","description":"","frontmatter":{},"relativePath":"utils/index.md","lastUpdated":1638452551948}',s={},r=[t('',1)];var d=i(s,[["render",function(i,t,e,s,d,n){return l(),a("div",null,r)}]]);export{e as __pageData,d as default};
