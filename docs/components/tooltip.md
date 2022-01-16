@@ -10,7 +10,7 @@ tooltip基于popper实现，但是和popper又有以下几点区别：
 ## Base
 
 <code-wrapper>
-<TooltipBase />
+<div class="code-source"><TooltipBase /></div>
 
  ```vue
 <template>
@@ -36,7 +36,7 @@ export default defineComponent({
 ## Custom
 
 <code-wrapper>
-<TooltipCustom />
+<div class="code-source"><TooltipCustom /></div>
 
  ```vue
 <template>
@@ -76,7 +76,7 @@ export default defineComponent({
 ## Disabled
 
 <code-wrapper>
-<TooltipDisabled />
+<div class="code-source"><TooltipDisabled /></div>
 
  ```vue
 <template>

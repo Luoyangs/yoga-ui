@@ -1,5 +1,5 @@
-export * from "./create";
-export * from "./preset";
+export * from './create';
+export * from './preset';
 export {
   Icon,
   Button,
@@ -14,5 +14,8 @@ export {
   InputGroup,
   Popper,
   Tooltip,
+  DatePicker,
+  DatePickerPanel,
+  DaterangePickerPanel,
 // {{COMPONENT}}
-} from "./components";
+} from './components';

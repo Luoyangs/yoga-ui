@@ -4,7 +4,7 @@
 ## Base
 
 <code-wrapper>
-<InputBase />
+<div class="code-source"><InputBase /></div>
 
  ```vue
 <template>
@@ -20,7 +20,7 @@
 ## Type
 
 <code-wrapper>
-<InputType />
+<div class="code-source"><InputType /></div>
 
  ```vue
 <template>
@@ -59,7 +59,7 @@ export default defineComponent({
 ## Size
 
 <code-wrapper>
-<InputSize />
+<div class="code-source"><InputSize /></div>
 
  ```vue
 <template>
@@ -77,7 +77,7 @@ export default defineComponent({
 ## Clearable
 
 <code-wrapper>
-<InputClearable />
+<div class="code-source"><InputClearable /></div>
 
  ```vue
 <template>
@@ -93,7 +93,7 @@ export default defineComponent({
 ## Disabled
 
 <code-wrapper>
-<InputDisabled />
+<div class="code-source"><InputDisabled /></div>
 
  ```vue
 <template>
@@ -110,7 +110,7 @@ export default defineComponent({
 ## Prefix-suffix
 
 <code-wrapper>
-<InputPrefixSuffix />
+<div class="code-source"><InputPrefixSuffix /></div>
 
  ```vue
 <template>
@@ -148,7 +148,7 @@ export default defineComponent({
 ## With-word-limit
 
 <code-wrapper>
-<InputWithWordLimit />
+<div class="code-source"><InputWithWordLimit /></div>
 
  ```vue
 <template>
@@ -165,7 +165,7 @@ export default defineComponent({
 ## Helper
 
 <code-wrapper>
-<InputHelper />
+<div class="code-source"><InputHelper /></div>
 
  ```vue
 <template>
@@ -186,7 +186,7 @@ export default defineComponent({
 ## Restriction
 
 <code-wrapper>
-<InputRestriction />
+<div class="code-source"><InputRestriction /></div>
 
  ```vue
 <template>
@@ -228,7 +228,7 @@ export default defineComponent({
 ## Numeric
 
 <code-wrapper>
-<InputNumeric />
+<div class="code-source"><InputNumeric /></div>
 
  ```vue
 <template>
@@ -268,7 +268,7 @@ export default defineComponent({
 ## Group
 
 <code-wrapper>
-<InputGroup />
+<div class="code-source"><InputGroup /></div>
 
  ```vue
 <template>

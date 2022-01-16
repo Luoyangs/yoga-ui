@@ -4,7 +4,7 @@
 ## Icons
 
 <code-wrapper>
-<IconIcons />
+<div class="code-source"><IconIcons /></div>
 
  ```vue
 <template>

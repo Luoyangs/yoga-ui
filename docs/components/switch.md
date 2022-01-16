@@ -4,7 +4,7 @@
 ## Base
 
 <code-wrapper>
-<SwitchBase />
+<div class="code-source"><SwitchBase /></div>
 
  ```vue
 <template>
@@ -43,7 +43,7 @@ export default defineComponent({
 ## Disabled
 
 <code-wrapper>
-<SwitchDisabled />
+<div class="code-source"><SwitchDisabled /></div>
 
  ```vue
 <template>
@@ -68,7 +68,7 @@ export default defineComponent({
 ## Size
 
 <code-wrapper>
-<SwitchSize />
+<div class="code-source"><SwitchSize /></div>
 
  ```vue
 <template>
@@ -110,7 +110,7 @@ export default defineComponent({
 ## Custom
 
 <code-wrapper>
-<SwitchCustom />
+<div class="code-source"><SwitchCustom /></div>
 
  ```vue
 <template>

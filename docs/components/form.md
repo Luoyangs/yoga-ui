@@ -4,7 +4,7 @@
 ## Basic
 
 <code-wrapper>
-<FormBasic />
+<div class="code-source"><FormBasic /></div>
 
  ```vue
 <template>
@@ -98,7 +98,7 @@ export default defineComponent({
 ## Each
 
 <code-wrapper>
-<FormEach />
+<div class="code-source"><FormEach /></div>
 
  ```vue
 <template>

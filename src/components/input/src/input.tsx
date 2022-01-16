@@ -1,4 +1,4 @@
-import { h, defineComponent, SetupContext, nextTick, reactive, getCurrentInstance, onMounted } from "vue";
+import { h, defineComponent, SetupContext, nextTick, reactive, getCurrentInstance, onMounted, watch } from "vue";
 import ClearIcon from '@base/icons/Clear';
 import { Icon } from "@components/icon";
 import { useComputedState } from '@components/input/src/use-input';
@@ -17,8 +17,8 @@ export default defineComponent({
     const { proxy } = getCurrentInstance();
     const state = reactive<InputState>({
       focused: false,
-      currentValue: null,
       textareaCalcStyle: {},
+      currentValue: props.unicodeNormalized ? sliceStr(props.modelValue || '', 0, props.maxlength) : props.modelValue,
     });
     const {
       formItem,
@@ -35,6 +35,10 @@ export default defineComponent({
 
     onMounted(() => {
       resizeTextarea();
+    });
+
+    watch(() => props.modelValue, (val) => {
+      setCurrentValue(val, 'input', true);
     });
 
     const resizeTextarea = () => {
@@ -129,7 +133,8 @@ export default defineComponent({
       return false;
     };
 
-    const clear = () => {
+    const clear = (e: MouseEvent) => {
+      e.stopPropagation();
       if (props.disabled) {
         return;
       }
@@ -284,7 +289,7 @@ export default defineComponent({
 
     const renderInput = (): JSX.Element => {
       return (
-        <div class="yoga-input">
+        <div class="yoga-input" onClick={handleClick}>
           <div class={innerClass.value}>
             {renderInputPrefix()}
             <input

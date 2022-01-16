@@ -68,6 +68,7 @@ function getGuideSidebar() {
     { text: "复选框 Checkbox", link: "/components/checkbox" },
     { text: "开关 Switch", link: "/components/switch" },
     { text: "输入框 Input", link: "/components/input" },
+    { text: "日期选择 DatePicker", link: "/components/date-picker" },
     { text: "表单 Form", link: "/components/form" },
   ];
   const messages = [

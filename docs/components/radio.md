@@ -4,7 +4,7 @@
 ## Basic
 
 <code-wrapper>
-<RadioBasic />
+<div class="code-source"><RadioBasic /></div>
 
  ```vue
 <template>
@@ -82,7 +82,7 @@ export default defineComponent({
 ## Group
 
 <code-wrapper>
-<RadioGroup />
+<div class="code-source"><RadioGroup /></div>
 
  ```vue
 <template>
@@ -155,7 +155,7 @@ export default defineComponent({
 ## Size
 
 <code-wrapper>
-<RadioSize />
+<div class="code-source"><RadioSize /></div>
 
  ```vue
 <template>
@@ -234,7 +234,7 @@ export default defineComponent({
 ## Disabled
 
 <code-wrapper>
-<RadioDisabled />
+<div class="code-source"><RadioDisabled /></div>
 
  ```vue
 <template>

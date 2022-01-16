@@ -2,7 +2,7 @@ const fs = require("fs");
 const { resolve } = require("path");
 const camelCase = require('camelcase');
 const { execSync } = require("child_process");
-const capitalize = require("lodash/capitalize");
+const upperFirst = require("lodash/upperFirst");
 
 const execSyncHandler = (command) => {
   console.log("\n\x1b[32m$ " + command + "\x1b[0m");
@@ -34,15 +34,15 @@ function updateMdByComponentName(componentName) {
             ),
             "utf-8"
           );
-          const importName = `${capitalize(componentName)}${camelCase(demoName, { pascalCase: true })}`;
+          const importName = `${upperFirst(camelCase(componentName))}${camelCase(demoName, { pascalCase: true })}`;
           importNames.push(importName);
           scripts.push(
             `import ${importName} from '../../src/components/${componentName}/demo/${demoName}.vue';`
           );
 
-          return `\n## ${capitalize(
+          return `\n## ${upperFirst(
             demoName
-          )}\n\n<code-wrapper>\n<${importName} />\n\n \`\`\`vue\n${mdFile}\n\`\`\`\n\n</code-wrapper>\n\n`;
+          )}\n\n<code-wrapper>\n<div class="code-source"><${importName} /></div>\n\n \`\`\`vue\n${mdFile}\n\`\`\`\n\n</code-wrapper>\n\n`;
         } catch (e) {
           console.log("e", e);
           return "";
@@ -81,15 +81,15 @@ function updateMdByComponentName(componentName) {
 }
 
 function updateMdByPath(event, path) {
-  if (event === 'change' && /\/components\/([a-z_]+)\/README.md$/.test(path)) {
+  if (event === 'change' && /\/components\/([a-z]+[a-z-]*)\/README.md$/.test(path)) {
     const [_, componentName] = path.match(
-      /\/components\/([a-z_]+)\/README.md$/
+      /\/components\/([a-z]+[a-z-]*)\/README.md$/
     );
     return updateMdByComponentName(componentName);
   }
-  if (/\/([a-z]+)\/demo\/([a-z_]+).[vue|.md]/.test(path)) {
+  if (/\/([a-z]+[a-z-]*)\/demo\/([a-z]+[a-z-]*).[vue|.md]/.test(path)) {
     const [_, componentName] = path.match(
-      /\/([a-z]+)\/demo\/([a-z_]+).[vue|.md]/
+      /\/([a-z]+[a-z-]*)\/demo\/([a-z]+[a-z-]*).[vue|.md]/
     );
     return updateMdByComponentName(componentName);
   }

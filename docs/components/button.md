@@ -4,7 +4,7 @@
 ## Base
 
 <code-wrapper>
-<ButtonBase />
+<div class="code-source"><ButtonBase /></div>
 
  ```vue
 <template>
@@ -39,7 +39,7 @@ export default defineComponent({
 ## Disabled
 
 <code-wrapper>
-<ButtonDisabled />
+<div class="code-source"><ButtonDisabled /></div>
 
  ```vue
 <template>
@@ -74,7 +74,7 @@ export default defineComponent({
 ## Dashed
 
 <code-wrapper>
-<ButtonDashed />
+<div class="code-source"><ButtonDashed /></div>
 
  ```vue
 <template>
@@ -107,7 +107,7 @@ export default defineComponent({
 ## Circle
 
 <code-wrapper>
-<ButtonCircle />
+<div class="code-source"><ButtonCircle /></div>
 
  ```vue
 <template>
@@ -141,7 +141,7 @@ export default defineComponent({
 ## Size
 
 <code-wrapper>
-<ButtonSize />
+<div class="code-source"><ButtonSize /></div>
 
  ```vue
 <template>
@@ -180,7 +180,7 @@ export default defineComponent({
 ## Icon
 
 <code-wrapper>
-<ButtonIcon />
+<div class="code-source"><ButtonIcon /></div>
 
  ```vue
 <template>
@@ -214,15 +214,17 @@ export default defineComponent({
 
 
 <style lang="scss">
-.yoga-button {
-  margin-top: 12px;
-  margin-right: 12px;
-}
-.btn-wrap {
-  display: inline-block;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 14px 24px;
-  border-radius: 4px;
+.button-pages {
+  .yoga-button {
+    margin-top: 12px;
+    margin-right: 12px;
+  }
+  .btn-wrap {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 14px 24px;
+    border-radius: 4px;
+  }
 }
 </style>
 

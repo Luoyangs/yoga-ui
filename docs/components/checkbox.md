@@ -4,7 +4,7 @@
 ## Base
 
 <code-wrapper>
-<CheckboxBase />
+<div class="code-source"><CheckboxBase /></div>
 
  ```vue
 <template>
@@ -36,7 +36,7 @@ export default defineComponent({
 ## Indeterminate
 
 <code-wrapper>
-<CheckboxIndeterminate />
+<div class="code-source"><CheckboxIndeterminate /></div>
 
  ```vue
 <template>
@@ -98,7 +98,7 @@ export default defineComponent({
 ## Disabled
 
 <code-wrapper>
-<CheckboxDisabled />
+<div class="code-source"><CheckboxDisabled /></div>
 
  ```vue
 <template>
@@ -157,7 +157,7 @@ export default defineComponent({
 ## Group
 
 <code-wrapper>
-<CheckboxGroup />
+<div class="code-source"><CheckboxGroup /></div>
 
  ```vue
 <template>
@@ -221,7 +221,7 @@ export default defineComponent({
 ## Size
 
 <code-wrapper>
-<CheckboxSize />
+<div class="code-source"><CheckboxSize /></div>
 
  ```vue
 <template>
@@ -295,7 +295,7 @@ export default defineComponent({
 ## Fixed-width
 
 <code-wrapper>
-<CheckboxFixedWidth />
+<div class="code-source"><CheckboxFixedWidth /></div>
 
  ```vue
 <template>

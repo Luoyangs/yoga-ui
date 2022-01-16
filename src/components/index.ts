@@ -7,4 +7,5 @@ export * from "./switch";
 export * from "./input";
 export * from "./popper";
 export * from "./tooltip";
+export * from "./date-picker";
 // {{COMPONENT}}

@@ -30,10 +30,6 @@
   transform: scale(1.05);
   border-color: transparent;
 }
-.theme .nav-links .nav-link .item.active::after {
-  opacity: 1;
-  background-color: #ee4d2d;
-}
 .theme .nav-links .item:hover .nav-link .item {
   color: #ee4d2d;
   border-color: transparent;
@@ -138,6 +134,26 @@
 }
 .theme .simple-box {
   margin-bottom: 16px;
+}
+.theme table {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 45px;
+  line-height: 1.5em;
+}
+.theme table th,
+.theme table td {
+  border: none;
+}
+.theme table th {
+  border-bottom: 1px solid #dcdfe6;
+  padding: 15px;
+  max-width: 250px;
+}
+.theme table tr:nth-child(2n) {
+  background-color: #fff;
 }
 
 @media (min-width: 960px) {

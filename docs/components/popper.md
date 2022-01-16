@@ -13,7 +13,7 @@
 ## Base
 
 <code-wrapper>
-<PopperBase />
+<div class="code-source"><PopperBase /></div>
 
  ```vue
 <template>
@@ -48,7 +48,7 @@ export default defineComponent({
 ## Theme
 
 <code-wrapper>
-<PopperTheme />
+<div class="code-source"><PopperTheme /></div>
 
  ```vue
 <template>
@@ -83,7 +83,7 @@ export default defineComponent({
 ## Trigger
 
 <code-wrapper>
-<PopperTrigger />
+<div class="code-source"><PopperTrigger /></div>
 
  ```vue
 <template>
@@ -137,7 +137,7 @@ export default defineComponent({
 ## Placement
 
 <code-wrapper>
-<PopperPlacement />
+<div class="code-source"><PopperPlacement /></div>
 
  ```vue
 <template>
@@ -229,7 +229,7 @@ export default defineComponent({
 ## Disabled
 
 <code-wrapper>
-<PopperDisabled />
+<div class="code-source"><PopperDisabled /></div>
 
  ```vue
 <template>
