@@ -1,0 +1,1 @@
+import{_ as t,c as e,o as a,f as i}from"./app.d3587db5.js";const h='{"title":"Utils","description":"","frontmatter":{},"relativePath":"utils/index.md","lastUpdated":1642689410035}',s={},l=i('',5),_=[l];function o(d,n,r,c,p,u){return a(),e("div",null,_)}var T=t(s,[["render",o]]);export{h as __pageData,T as default};
