@@ -1,6 +1,6 @@
 import type { ComputedRef, CSSProperties, ExtractPropTypes, PropType, Ref, WritableComputedRef } from 'vue';
-import { Options, Placement, PositioningStrategy, Instance as PopperInstance } from '@popperjs/core';
-import { Nullable, RefElement } from '@base';
+import type { Options, Placement, PositioningStrategy, Instance as PopperInstance } from '@popperjs/core';
+import type { Nullable, RefElement } from '@base';
 
 export enum Theme {
   DARK = 'dark',

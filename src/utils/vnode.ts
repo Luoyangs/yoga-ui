@@ -1,6 +1,6 @@
 import { Fragment, Text, Comment, isVNode } from 'vue';
-import type { VNode, VNodeChild } from 'vue';
 import { isArray } from '@vue/shared';
+import type { VNode, VNodeChild } from 'vue';
 
 export const isFragment = (node: VNodeChild): boolean => isVNode(node) && node.type === Fragment;
 export const isText = (node: VNodeChild): boolean => (node as VNode).type === Text;

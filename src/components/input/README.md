@@ -1,6 +1,6 @@
 ## API
 
-### Input props
+**Input props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | type | the type of input | String | native type and `textarea` / `numeric` | `text` |
@@ -37,7 +37,7 @@
 | is-round | wether use Number.toFixed or direct intercept, only works for type=numeric  | Boolean | - | true(means direct intercept) |
 | unicode-normalized| whether to calculate the string by utf-16, instead of the default utf-8 | Boolean | - | `false` |
 
-### Input slot
+**Input slot**
 All input slots and following
 | Slot | Description  |
 |:--|:--|
@@ -46,19 +46,19 @@ All input slots and following
 | error | the error message of input |
 | help | the help message of input |
 
-### Input events
+**Input events**
 All native input events and following
 | Event | Description | Parameters |
 |:--|:--|:--|
 | value-change | the change event of input value | the value |
 
 
-### InputGroup props
+**InputGroup props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | prepend-width | the width of prepend | Number | - | 120 |
 
-### InputGroup slot
+**InputGroup slot**
 All input slots and following
 | Slot | Description  |
 |:--|:--|

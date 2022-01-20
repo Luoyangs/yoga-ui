@@ -1,6 +1,6 @@
 import { h, defineComponent } from 'vue';
 import type { SetupContext } from 'vue';
-import { UPDATE_MODEL_EVENT } from '@base';
+import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@base';
 import DatePickerHeader from '@components/date-picker/src/renderers/picker-header';
 import DateTable from '@components/date-picker/src/renderers/table-date';
 import renderMonthTable from '@components/date-picker/src/renderers/table-month';
@@ -14,7 +14,7 @@ export { DatePickerPanelProps };
 export default defineComponent({
   name: 'YDatePickerPanel',
   props: datePickerPanelProps,
-  emits: [UPDATE_MODEL_EVENT, 'change'],
+  emits: [UPDATE_MODEL_EVENT, CHANGE_EVENT],
   setup(props: DatePickerPanelProps, context: SetupContext) {
     const prefixCls = 'yoga-date-picker-panel';
 

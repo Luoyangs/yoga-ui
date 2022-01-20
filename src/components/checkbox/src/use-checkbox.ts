@@ -1,18 +1,8 @@
-import {
-  toRefs,
-  inject,
-  nextTick,
-  reactive,
-  computed,
-  getCurrentInstance,
-} from 'vue';
-import {
-  UseCheckbox,
-  CheckboxState,
-  CheckboxGroupKey,
-  CheckboxProps,
-  CheckboxGroupContext,
-} from '@components/checkbox/types';
+import { toRefs, inject, nextTick, reactive, computed, getCurrentInstance } from 'vue';
+import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@base';
+import { isNumber } from '@utils/helper';
+import { CheckboxGroupKey } from '@components/checkbox/types';
+import type { UseCheckbox, CheckboxState, CheckboxProps, CheckboxGroupContext } from '@components/checkbox/types';
 
 export const useCheckbox = (props: CheckboxProps): UseCheckbox => {
   const { emit } = getCurrentInstance();
@@ -30,7 +20,7 @@ export const useCheckbox = (props: CheckboxProps): UseCheckbox => {
 
     return props.modelValue ?? state.selfModel;
   });
-  const isDisabled = computed(() => checkboxGroup ? checkboxGroup.disabled || props.disabled : props.disabled);
+  const isDisabled = computed(() => (checkboxGroup ? checkboxGroup.disabled || props.disabled : props.disabled));
   const checkboxClass = computed(() => {
     return [
       'yoga-checkbox',
@@ -40,14 +30,14 @@ export const useCheckbox = (props: CheckboxProps): UseCheckbox => {
     ];
   });
   const fixedLabelStyle = computed(() => {
-    if (checkboxGroup && typeof checkboxGroup.fixedWidth === 'number') {
+    if (checkboxGroup && isNumber(checkboxGroup.fixedWidth)) {
       return {
         width: `${checkboxGroup.fixedWidth}px`,
         'min-width': `${checkboxGroup.fixedWidth}px`,
         'max-width': `${checkboxGroup.fixedWidth}px`,
       };
     }
-  })
+  });
   function updateLabelStyle() {
     nextTick(() => {
       if (checkboxGroup && typeof checkboxGroup.fixedWidth === 'number' && state.labelRef?.scrollHeight > 20) {
@@ -67,13 +57,13 @@ export const useCheckbox = (props: CheckboxProps): UseCheckbox => {
     if (checkboxGroup) {
       checkboxGroup.changeEvent({
         key: props.value,
-        value
+        value,
       });
       return;
     }
 
-    emit('change', value);
-    emit('update:modelValue', value);
+    emit(CHANGE_EVENT, value);
+    emit(UPDATE_MODEL_EVENT, value);
     state.selfModel = value;
   }
 
@@ -88,4 +78,4 @@ export const useCheckbox = (props: CheckboxProps): UseCheckbox => {
     updateLabelStyle,
     handleValueChange,
   };
-}
+};

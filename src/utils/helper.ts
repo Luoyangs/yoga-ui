@@ -1,6 +1,6 @@
 import { isPlainObject, isArray, isFunction, NOOP, toTypeString, isString, toRawType } from '@vue/shared';
 
-export { isArray, isPlainObject, isFunction, isString, NOOP };
+export { isArray, isPlainObject, isFunction, isString, NOOP, toTypeString };
 /**
  * whether the object is a Regular Expression
  * @param {Object} object the given object
@@ -11,6 +11,7 @@ export function isRegExp(value: string): boolean {
 }
 export const isServer = typeof window === 'undefined';
 export const isBool = (val: unknown): boolean => typeof val === 'boolean';
+export const isNumber = (val: unknown): boolean => typeof val === 'number';
 export const isHTMLElement = (val: unknown): boolean => toRawType(val).startsWith('HTML');
 
 /**
@@ -32,7 +33,7 @@ export function debounce(
   delay: number
 ): typeof fn {
   let timerId: ReturnType<typeof setTimeout> | null;
-  return function (...args) {
+  return (...args) => {
     if (timerId) {
       clearTimeout(timerId);
     }
@@ -52,7 +53,7 @@ export function throttle(
   limit: number
 ): typeof fn {
   let inThrottle: boolean;
-  return function (...args) {
+  return (...args) => {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
     if (!inThrottle) {

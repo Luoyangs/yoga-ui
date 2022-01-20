@@ -1,11 +1,11 @@
 <template>
-  <single-demo label="limit min and max">
+  <single-demo label="限定最大最小日期">
     <y-date-picker
       :min="minDate"
       :max="maxDate"
       v-model="value" />
   </single-demo>
-  <single-demo label="date range with limit min and max while fixed start">
+  <single-demo label="固定起始日期，并限定最大最小日期">
     <y-date-picker
       type="daterange"
       fixed="start"

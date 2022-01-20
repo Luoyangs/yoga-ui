@@ -1,12 +1,20 @@
 import { reactive, ref, unref, computed, watch, toRefs } from 'vue';
-import type { SetupContext, ComponentPublicInstance } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
-import { createPopper, Instance as PopperInstance } from '@popperjs/core';
-import { Nullable, RefElement } from '@base';
-import { PopperProps, EmitType, IPopperState, PopperEvent, TriggerType, PopperState } from '@components/popper/types';
+import { createPopper } from '@popperjs/core';
 import buildModifier from '@components/popper/src/hook/build-modifier';
 import PopupManager from '@utils/popup-manager';
 import { isBool, isString, isHTMLElement, isArray } from '@utils/helper';
+import type { SetupContext, ComponentPublicInstance } from 'vue';
+import type { Nullable, RefElement } from '@base';
+import type { Instance as PopperInstance } from '@popperjs/core';
+import type {
+  PopperProps,
+  EmitType,
+  IPopperState,
+  PopperEvent,
+  TriggerType,
+  PopperState,
+} from '@components/popper/types';
 
 export default function usePopper(props: PopperProps, { emit }: SetupContext<EmitType[]>): IPopperState {
   const arrowRef = ref<RefElement>(null);

@@ -1,7 +1,5 @@
-# Icon
 
-
-## Icons
+## 图片
 
 <code-wrapper>
 <div class="code-source"><IconIcons /></div>

@@ -1,5 +1,6 @@
-import { ComputedRef, ExtractPropTypes, PropType } from 'vue';
-import { YUISize, YUI_SIZE } from '@base';
+import { UI_SIZE } from '@base';
+import type { ComputedRef, ExtractPropTypes, PropType } from 'vue';
+import type { UISize } from '@base';
 
 export const radioProps = {
   /** v-model的绑定 */
@@ -29,9 +30,9 @@ export const radioGroupProps = {
   disabled: Boolean,
   vertical: Boolean,
   size: {
-    type: String as PropType<YUISize>,
+    type: String as PropType<UISize>,
     default: 'normal',
-    validator: (value: string = 'normal'): boolean => YUI_SIZE.indexOf(value) >= 0,
+    validator: (value: string = 'normal'): boolean => UI_SIZE.indexOf(value) >= 0,
   },
   type: {
     type: String,
@@ -51,7 +52,7 @@ export type RadioGroupMittEvent = {
 export const RadioGroupKey = 'YogaRadioGroup';
 
 export interface UseRadio {
-  size: ComputedRef<'' | YUISize>;
+  size: ComputedRef<'' | UISize>;
   isDisabled: ComputedRef<boolean>;
   radioGroup: RadioGroupContext;
   checkedValue: ComputedRef<boolean>;

@@ -1,7 +1,5 @@
-# Form
 
-
-## Basic
+## 基础表单
 
 <code-wrapper>
 <div class="code-source"><FormBasic /></div>
@@ -19,7 +17,7 @@
       </y-radio>
     </y-form-item>
     <y-form-item prop="input" label="Input Value">
-      <input name="radio-demo" v-model="formModel.input" />
+      <y-input name="radio-demo" v-model="formModel.input" />
     </y-form-item>
     <y-button @click="handleCancel"> 取消 </y-button>
     <y-button type="primary" @click="handlePost"> 提交 </y-button>
@@ -94,8 +92,7 @@ export default defineComponent({
 
 
 
-
-## Each
+## 灵活增加
 
 <code-wrapper>
 <div class="code-source"><FormEach /></div>
@@ -108,7 +105,7 @@ export default defineComponent({
         :label="`Student ${index + 1}`"
         :prop="`students[${index}].name`"
       >
-        <input v-model="student.name" />
+        <y-input v-model="student.name" />
         <y-button @click="handleDeleteStudent(index)">Delete</y-button>
       </y-form-item>
     </template>

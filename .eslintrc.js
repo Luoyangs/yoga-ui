@@ -25,7 +25,7 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/no-inferrable-types': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^h$' }],
+    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^h$|^_' }],
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
@@ -99,7 +99,6 @@ module.exports = {
     // 强制可嵌套的块的最大深度4
     'max-depth': 'warn',
     // 强制最大行数 400
-    // "max-lines": ["warn", { "max": 120 }],
     // 强制函数最大代码行数 50
     // 'max-lines-per-function': ['warn', { max: 70 }],
     // 强制函数块最多允许的的语句数量20
@@ -111,7 +110,7 @@ module.exports = {
     // 强制每一行中所允许的最大语句数量
     'max-statements-per-line': ['warn', { max: 1 }],
     // 要求方法链中每个调用都有一个换行符
-    'newline-per-chained-call': ['warn', { ignoreChainWithDepth: 3 }],
+    'newline-per-chained-call': 'off',
     // 禁止 if 作为唯一的语句出现在 else 语句中
     'no-lonely-if': 'warn',
     // 禁止空格和 tab 的混合缩进
@@ -122,8 +121,6 @@ module.exports = {
     // semi: ['warn', 'never'],
     // 强制在块之前使用一致的空格
     'space-before-blocks': 'warn',
-    // 强制在 function的左括号之前使用一致的空格
-    'space-before-function-paren': ['warn', 'never'],
     // 强制在圆括号内使用一致的空格
     'space-in-parens': 'warn',
     // 要求操作符周围有空格

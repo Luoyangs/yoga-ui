@@ -3,6 +3,8 @@ const { resolve } = require("path");
 const camelCase = require('camelcase');
 const { execSync } = require("child_process");
 const upperFirst = require("lodash/upperFirst");
+const REGEXP = /<!-- ([a-zA-Z-]*)(\(\S*\))* -->/;
+const GLOBAL_REGEXP = /<!-- ([a-zA-Z-]*)(\(\S*\))* -->/g;
 
 const execSyncHandler = (command) => {
   console.log("\n\x1b[32m$ " + command + "\x1b[0m");
@@ -20,11 +22,12 @@ function updateMdByComponentName(componentName) {
       "utf-8"
     );
 
-    if (mdFile && /<!-- ([a-zA-Z-]*) -->/.test(mdFile)) {
+    if (mdFile && REGEXP.test(mdFile)) {
       let scripts = [];
       let importNames = [];
-      mdFile = mdFile.replace(/<!-- ([a-zA-Z-]*) -->/g, ($1) => {
-        const demoName = $1.replace(/<!-- ([a-zA-Z-]*) -->/, "$1");
+      mdFile = mdFile.replace(GLOBAL_REGEXP, ($1) => {
+        const demoName = $1.replace(REGEXP, "$1");
+        const descName = $1.replace(REGEXP, "$2").replace(/\(/, '').replace(/\)/, '');
 
         try {
           const mdFile = fs.readFileSync(
@@ -40,9 +43,7 @@ function updateMdByComponentName(componentName) {
             `import ${importName} from '../../src/components/${componentName}/demo/${demoName}.vue';`
           );
 
-          return `\n## ${upperFirst(
-            demoName
-          )}\n\n<code-wrapper>\n<div class="code-source"><${importName} /></div>\n\n \`\`\`vue\n${mdFile}\n\`\`\`\n\n</code-wrapper>\n\n`;
+          return `\n## ${descName || upperFirst(demoName)}\n\n<code-wrapper>\n<div class="code-source"><${importName} /></div>\n\n \`\`\`vue\n${mdFile}\n\`\`\`\n\n</code-wrapper>\n\n`;
         } catch (e) {
           console.log("e", e);
           return "";

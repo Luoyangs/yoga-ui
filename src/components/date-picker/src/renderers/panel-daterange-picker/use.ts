@@ -1,5 +1,5 @@
 import { computed, reactive, watch, onMounted } from 'vue';
-import { UPDATE_MODEL_EVENT } from '@base';
+import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@base';
 import { isFunction, isValidDate } from '@utils/helper';
 import {
   compareMonth,
@@ -596,7 +596,7 @@ export const useHook = (props: DaterangePickerPanelProp, context: SetupContext<E
         endDate.getTime() === oldEndDate.getTime()
       )
     ) {
-      context.emit('change', selection);
+      context.emit(CHANGE_EVENT, selection);
     }
   };
 
@@ -758,7 +758,9 @@ export const useHook = (props: DaterangePickerPanelProp, context: SetupContext<E
     }
   };
 
-  const onConfirm = () => {};
+  const onConfirm = () => {
+    console.log('onConfirm');
+  };
 
   //////////////////////////////// lifecycle ///////////////////////////
   onMounted(() => {

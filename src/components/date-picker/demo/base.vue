@@ -1,33 +1,33 @@
 <template>
-  <single-demo label="default">
-    <y-date-picker placeholder="pick date" v-model="value" />
+  <single-demo label="选择单个日期">
+    <y-date-picker placeholder="选择日期" v-model="value" />
   </single-demo>
 
-  <single-demo label="start of week is monday">
+  <single-demo label="以周一作为一周开始">
     <y-date-picker
       :start-of-week="1"
-      placeholder="start of week is monday"
+      placeholder="以周一作为一周开始"
       v-model="value" />
   </single-demo>
 
-  <single-demo label="not show overflow date">
+  <single-demo label="不显示非本月的日期">
     <y-date-picker
       :show-overflow-date="false"
-      placeholder="not show overflow date"
+      placeholder="不显示非本月的日期"
       v-model="value" />
   </single-demo>
 
-  <single-demo label="define format YYYY-MM-DD hh:mm:ss">
+  <single-demo label="自定义展示的日期格式 YYYY-MM-DD hh:mm:ss">
     <y-date-picker
       format="YYYY-MM-DD hh:mm:ss"
-      placeholder="define format"
+      placeholder="自定义展示的日期格式"
       v-model="value" />
   </single-demo>
 
-  <single-demo label="define format function">
+  <single-demo label="使用函数格式化展示日期">
     <y-date-picker
       :format="formatFun"
-      placeholder="define format"
+      placeholder="自定义展示的日期格式"
       v-model="value" />
   </single-demo>
 </template>

@@ -1,14 +1,15 @@
-import { h, defineComponent, computed, PropType } from 'vue';
-import { YUISize } from '@base';
+import { h, defineComponent, computed } from 'vue';
+import { UISize } from '@base';
 import { Icon } from '@components/icon';
-import { ButtonNativeType, ButtonProps, ButtonType } from '@components/button/types';
+import type { PropType, SetupContext } from 'vue';
+import type { ButtonNativeType, ButtonProps, ButtonType } from '@components/button/types';
 
 export default defineComponent({
   name: 'YButton',
   props: {
     type: String as PropType<ButtonType>,
     size: {
-      type: String as PropType<YUISize>,
+      type: String as PropType<UISize>,
       default: 'normal',
       validator: (value: string = 'normal') => ['large', 'normal', 'small'].indexOf(value) >= 0,
     },
@@ -35,7 +36,7 @@ export default defineComponent({
   components: {
     Icon,
   },
-  setup(props: ButtonProps) {
+  setup(props: ButtonProps, { slots }: SetupContext) {
     const onClick = (event: MouseEvent) => {
       document.documentElement.removeAttribute('data-focus-visible');
       if (props.disabled) {
@@ -60,6 +61,7 @@ export default defineComponent({
         'yoga-button--block': props.fullWidth,
         'yoga-button--round': props.round,
         'yoga-button--circle': props.circle,
+        'yoga-button--pure': !slots.default,
         'yoga-button--disabled': props.disabled,
         'yoga-button--underline': props.href && type === 'link',
       };

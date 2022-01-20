@@ -1,7 +1,5 @@
 module.exports = {
   tabWidth: 2, // 缩进字节数
-  jsxSingleQuote: true, // 在jsx中使用单引号代替双引号
-  jsxBracketSameLine: false, // 在jsx中把'>' 是否单独放一行
   printWidth: 120, // 超过最大值换行
   singleQuote: true, // 使用单引号代替双引号
   semi: true, // 句尾添加分号

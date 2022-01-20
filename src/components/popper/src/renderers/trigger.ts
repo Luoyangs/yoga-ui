@@ -1,6 +1,6 @@
 import { cloneVNode } from 'vue';
-import type { Ref, VNode, ComponentPublicInstance } from 'vue';
 import { getFirstValidNode } from '@utils/vnode';
+import type { Ref, VNode, ComponentPublicInstance } from 'vue';
 
 interface RenderTriggerProps extends Record<string, unknown> {
   ref: string | Ref<HTMLElement | ComponentPublicInstance>;

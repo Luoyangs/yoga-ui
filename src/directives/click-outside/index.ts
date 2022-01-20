@@ -1,8 +1,8 @@
-import type { DirectiveBinding, ComponentPublicInstance, ObjectDirective } from 'vue';
-import { FlushList, DocumentHandler } from '@directives/click-outside/types';
-import { Nullable } from '@base';
 import { on } from '@utils/dom';
 import { isArray, isServer } from '@utils/helper';
+import type { Nullable } from '@base';
+import type { FlushList, DocumentHandler } from '@directives/click-outside/types';
+import type { DirectiveBinding, ComponentPublicInstance, ObjectDirective } from 'vue';
 
 const nodeList: FlushList = new Map();
 let startClick: MouseEvent;

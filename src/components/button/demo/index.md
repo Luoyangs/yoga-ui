@@ -1,18 +1,13 @@
-# Button
-
-<!-- base -->
-<!-- disabled -->
-<!-- dashed -->
-<!-- circle -->
-<!-- size -->
-<!-- icon -->
+<!-- base(基础按钮) -->
+<!-- disabled(禁用按钮) -->
+<!-- dashed(虚线按钮) -->
+<!-- circle(圆形按钮) -->
+<!-- size(按钮尺寸) -->
+<!-- icon(图标按钮) -->
 
 <style lang="scss">
 .button-pages {
-  .yoga-button {
-    margin-top: 12px;
-    margin-right: 12px;
-  }
+
   .btn-wrap {
     display: inline-block;
     background: rgba(0, 0, 0, 0.5);

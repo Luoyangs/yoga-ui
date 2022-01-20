@@ -1,31 +1,11 @@
-# Input
-
-<!-- base -->
-<!-- type -->
-<!-- size -->
-<!-- clearable -->
-<!-- disabled -->
-<!-- prefix-suffix -->
-<!-- with-word-limit -->
-<!-- helper -->
-<!-- restriction -->
-<!-- numeric -->
-<!-- group -->
-
-<style lang="scss">
-.input-pages .yoga-input {
-  display: block;
-  width: 360px;
-  margin-bottom: 12px;
-}
-.input-pages .yoga-input__group {
-  width: 360px;
-  margin-bottom: 12px;
-
-  .yoga-input {
-    display: inline-block;
-    width: auto;
-    margin-bottom: 0;
-  }
-}
-</style>
+<!-- base(基本输入框) -->
+<!-- type(其他类型) -->
+<!-- size(不同尺寸) -->
+<!-- clearable(清空态) -->
+<!-- disabled(禁用态) -->
+<!-- prefix-suffix(输入前缀/后缀) -->
+<!-- with-word-limit(数量限制) -->
+<!-- helper(输入框提示) -->
+<!-- restriction(校验) -->
+<!-- numeric(数字输入框) -->
+<!-- group(分组) -->

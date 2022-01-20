@@ -1,29 +1,32 @@
-import { h, computed, defineComponent, SetupContext, inject, provide, reactive, toRefs } from "vue";
-import mitt from "mitt";
-import { radioGroupProps, RadioGroupProps, RadioGroupMittEvent, RadioGroupKey } from "../types";
-import { FormItemContext, FormItemKey } from "@components/form/types";
-import "../styles/radio-group.scss";
+import { h, computed, defineComponent, SetupContext, inject, provide, reactive, toRefs } from 'vue';
+import mitt from 'mitt';
+import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@base';
+import { FormItemKey } from '@components/form/types';
+import { radioGroupProps, RadioGroupKey } from '@components/radio/types';
+import type { RadioGroupProps, RadioGroupMittEvent } from '@components/radio/types';
+import type { FormItemContext } from '@components/form/types';
+import '@components/radio/styles/radio-group.scss';
 
 export default defineComponent({
-  name: "YRadioGroup",
+  name: 'YRadioGroup',
   props: radioGroupProps,
-  emits: ["update:modelValue", "change"],
+  emits: [UPDATE_MODEL_EVENT, CHANGE_EVENT],
   setup(props: RadioGroupProps, { slots, emit }: SetupContext) {
     const radioGroupMitt = mitt<RadioGroupMittEvent>();
     const formItem = inject(FormItemKey, {} as FormItemContext);
     const className = computed(() => {
       return [
-        "yoga-radio-group",
+        'yoga-radio-group',
         `yoga-radio-group--${props.size}`,
-        {"yoga-radio-group--vertical": props.vertical},
-        {[`yoga-radio-group--${props.type}`]: props.type},
+        props.vertical ? 'yoga-radio-group--vertical' : '',
+        props.type ? `yoga-radio-group--${props.type}` : '',
       ];
     });
 
     const changeEvent = (value) => {
-      emit('update:modelValue', value);
+      emit(UPDATE_MODEL_EVENT, value);
       if (value !== props.modelValue) {
-        emit('change', value);
+        emit(CHANGE_EVENT, value);
         formItem.validate?.('change');
       }
     };

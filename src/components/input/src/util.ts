@@ -26,9 +26,9 @@ export function sliceStr(str: number | string, min: number, max: number): string
  * @param {number} value
  * @param {number} precision
  */
- export function valueToFixed(value: string | number, precision: number): string {
+export function valueToFixed(value: string | number, precision: number): string {
   // 是否是正数
-  const isPositive = (+value) >= 0;
+  const isPositive = +value >= 0;
   // 转成字符串
   let newValue = value + '';
   // 去掉正负号，统一按照正数来处理，最后再加上符号
@@ -46,14 +46,14 @@ export function sliceStr(str: number | string, min: number, max: number): string
 
   // 非数字
   if (!/^\d+\.?\d*$/gi.test(newValue)) {
-    return (isPositive || newValue === '') ? '' : '-';
+    return isPositive || newValue === '' ? '' : '-';
   }
 
   const values = newValue.split('.');
   let result = '';
 
   // 在str后面加n个0
-  const paddingZero = function (str, n) {
+  const paddingZero = (str, n) => {
     for (let i = 0; i < n; i++) {
       str += '0';
     }
@@ -62,12 +62,11 @@ export function sliceStr(str: number | string, min: number, max: number): string
 
   // 在str后面加0，直至str的长度达到n
   // 如果超过了n，则直接截取前n个字符串
-  const paddingZeroTo = function (str, n) {
+  const paddingZeroTo = (str, n) => {
     if (str.length >= n) {
       return str.substr(0, n);
-    } else {
-      return paddingZero(str, n - str.length);
     }
+    return paddingZero(str, n - str.length);
   };
 
   // 直接就是整数
@@ -110,16 +109,17 @@ const CONTEXT_STYLE = [
   'padding-left',
   'padding-right',
   'border-width',
-  'box-sizing'
+  'box-sizing',
 ];
 interface TextareaHeight {
   minHeight?: string;
-  height?: string
+  height?: string;
 }
 export const calcTextareaHeight = (
   ele: HTMLTextAreaElement,
   minRows: number = TEXTAREA_MIN_ROW,
-  maxRows = null): TextareaHeight => {
+  maxRows = null
+): TextareaHeight => {
   const results: TextareaHeight = {};
 
   try {
@@ -130,15 +130,12 @@ export const calcTextareaHeight = (
 
     const style = window.getComputedStyle(ele);
     const boxSizing = style.getPropertyValue('box-sizing');
-    const paddingSize = (
-      parseFloat(style.getPropertyValue('padding-bottom')) +
-      parseFloat(style.getPropertyValue('padding-top'))
-    );
-    const borderSize = (
+    const paddingSize =
+      parseFloat(style.getPropertyValue('padding-bottom')) + parseFloat(style.getPropertyValue('padding-top'));
+    const borderSize =
       parseFloat(style.getPropertyValue('border-bottom-width')) +
-      parseFloat(style.getPropertyValue('border-top-width'))
-    );
-    const contextStyle = CONTEXT_STYLE.map(name => `${name}:${style.getPropertyValue(name)}`).join(';');
+      parseFloat(style.getPropertyValue('border-top-width'));
+    const contextStyle = CONTEXT_STYLE.map((name) => `${name}:${style.getPropertyValue(name)}`).join(';');
 
     // set style
     hiddenTextarea.setAttribute('style', `${contextStyle};${HIDDEN_STYLE}`);
@@ -154,7 +151,7 @@ export const calcTextareaHeight = (
     // calc min-height
     hiddenTextarea.value = '';
     const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
-    let minHeight = singleRowHeight * minRows
+    let minHeight = singleRowHeight * minRows;
 
     if (boxSizing === 'border-box') {
       minHeight += paddingSize + borderSize;
@@ -181,4 +178,4 @@ export const calcTextareaHeight = (
   }
 
   return results;
-}
+};

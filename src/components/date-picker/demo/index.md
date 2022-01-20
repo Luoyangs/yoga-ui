@@ -1,8 +1,6 @@
-# DatePicker
-
-<!-- base -->
-<!-- type -->
-<!-- fixed -->
-<!-- limit -->
-<!-- disabled -->
-<!-- panel -->
+<!-- base(基础用法) -->
+<!-- type(其他选择器) -->
+<!-- fixed(固定始末) -->
+<!-- limit(限定) -->
+<!-- disabled(禁用) -->
+<!-- panel(面板) -->

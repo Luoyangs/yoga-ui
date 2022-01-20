@@ -1,14 +1,14 @@
-# Input
 
-
-## Base
+## 基本输入框
 
 <code-wrapper>
 <div class="code-source"><InputBase /></div>
 
  ```vue
 <template>
-  <y-input></y-input>
+  <single-demo label="基本输入框">
+    <y-input></y-input>
+  </single-demo>
 </template>
 
 ```
@@ -17,25 +17,35 @@
 
 
 
-## Type
+## 其他类型
 
 <code-wrapper>
 <div class="code-source"><InputType /></div>
 
  ```vue
 <template>
-  <y-input></y-input>
-  <y-input type="password"></y-input>
-  <y-input type="textarea"></y-input>
-  <y-input type="textarea" autosize></y-input>
-  <y-input type="textarea" :autosize="autosizeConfig"></y-input>
+  <single-demo label="文本输入框">
+    <y-input></y-input>
+  </single-demo>
+  <single-demo label="密码输入框">
+    <y-input type="password"></y-input>
+  </single-demo>
+  <single-demo label="长文本输入框">
+    <y-input type="textarea"></y-input>
+  </single-demo>
+  <single-demo label="自动调整">
+    <y-input type="textarea" autosize></y-input>
+  </single-demo>
+  <single-demo label="自定义">
+    <y-input type="textarea" :autosize="autosizeConfig"></y-input>
+  </single-demo>
 </template>
 
 <script>
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive } from 'vue';
 
 export default defineComponent({
-  name: "Type",
+  name: 'Type',
 
   setup() {
     const autosizeConfig = reactive({
@@ -46,7 +56,7 @@ export default defineComponent({
     return {
       autosizeConfig,
     };
-  }
+  },
 });
 </script>
 
@@ -56,16 +66,22 @@ export default defineComponent({
 
 
 
-## Size
+## 不同尺寸
 
 <code-wrapper>
 <div class="code-source"><InputSize /></div>
 
  ```vue
 <template>
-  <y-input size="small"></y-input>
-  <y-input></y-input>
-  <y-input size="large"></y-input>
+  <single-demo label="小尺寸">
+    <y-input size="small"></y-input>
+  </single-demo>
+  <single-demo label="正常尺寸">
+    <y-input></y-input>
+  </single-demo>
+  <single-demo label="大尺寸">
+    <y-input size="large"></y-input>
+  </single-demo>
 </template>
 
 ```
@@ -74,14 +90,16 @@ export default defineComponent({
 
 
 
-## Clearable
+## 清空态
 
 <code-wrapper>
 <div class="code-source"><InputClearable /></div>
 
  ```vue
 <template>
-  <y-input clearable></y-input>
+  <single-demo label="可清除">
+    <y-input clearable></y-input>
+  </single-demo>
 </template>
 
 ```
@@ -90,15 +108,19 @@ export default defineComponent({
 
 
 
-## Disabled
+## 禁用态
 
 <code-wrapper>
 <div class="code-source"><InputDisabled /></div>
 
  ```vue
 <template>
-  <y-input disabled placeholder="disabled"></y-input>
-  <y-input readonly placeholder="readonly"></y-input>
+  <single-demo label="禁止输入">
+    <y-input disabled placeholder="disabled"></y-input>
+  </single-demo>
+  <single-demo label="只读模式">
+    <y-input readonly placeholder="readonly"></y-input>
+  </single-demo>
 </template>
 
 ```
@@ -107,35 +129,47 @@ export default defineComponent({
 
 
 
-## Prefix-suffix
+## 输入前缀/后缀
 
 <code-wrapper>
 <div class="code-source"><InputPrefixSuffix /></div>
 
  ```vue
 <template>
-  <y-input prefix-label="UserName"></y-input>
-  <y-input :prefix-icon="MaleIcon"></y-input>
-  <y-input><template v-slot:prefix>用户名</template></y-input>
-  <y-input suffix-label="@baidu.com"></y-input>
-  <y-input :suffix-icon="SearchIcon"></y-input>
-  <y-input><template v-slot:suffix>RMB</template></y-input>
+  <single-demo label="配置prefix label">
+    <y-input prefix-label="UserName"></y-input>
+  </single-demo>
+  <single-demo label="配置prefix icon">
+    <y-input :prefix-icon="MaleIcon"></y-input>
+  </single-demo>
+  <single-demo label="配置prefix slot">
+    <y-input><template v-slot:prefix>用户名</template></y-input>
+  </single-demo>
+  <single-demo label="配置suffix label">
+    <y-input suffix-label="@baidu.com"></y-input>
+  </single-demo>
+  <single-demo label="配置suffix icon">
+    <y-input :suffix-icon="SearchIcon"></y-input>
+  </single-demo>
+  <single-demo label="配置suffix slot">
+    <y-input><template v-slot:suffix>RMB</template></y-input>
+  </single-demo>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import MaleIcon from "./male.svg";
-import SearchIcon from "./search.svg";
+import { defineComponent } from 'vue';
+import MaleIcon from './male.svg';
+import SearchIcon from './search.svg';
 
 export default defineComponent({
-  name: "PrefixAndSuffix",
+  name: 'PrefixAndSuffix',
 
   setup() {
     return {
       MaleIcon,
       SearchIcon,
     };
-  }
+  },
 });
 </script>
 
@@ -145,15 +179,19 @@ export default defineComponent({
 
 
 
-## With-word-limit
+## 数量限制
 
 <code-wrapper>
 <div class="code-source"><InputWithWordLimit /></div>
 
  ```vue
 <template>
-  <y-input :maxlength="300" show-word-limit></y-input>
-  <y-input type="textarea" :maxlength="300" show-word-limit></y-input>
+  <single-demo label="展示输入限制">
+    <y-input :maxlength="300" show-word-limit></y-input>
+  </single-demo>
+  <single-demo label="最多300字符">
+    <y-input type="textarea" :maxlength="300" show-word-limit></y-input>
+  </single-demo>
 </template>
 
 ```
@@ -162,19 +200,31 @@ export default defineComponent({
 
 
 
-## Helper
+## 输入框提示
 
 <code-wrapper>
 <div class="code-source"><InputHelper /></div>
 
  ```vue
 <template>
-  <y-input error error-message="校验失败，这是提示语句"></y-input>
-  <y-input help-text="这是辅助文案，请在合适的位置使用"></y-input>
-  <y-input><template v-slot:help>这是辅助文案，请在合适的位置使用</template></y-input>
-  <y-input type="textarea" error error-message="校验失败，这是提示语句"></y-input>
-  <y-input type="textarea" help-text="这是辅助文案，请在合适的位置使用"></y-input>
-  <y-input type="textarea"><template v-slot:help>这是辅助文案，请在合适的位置使用</template></y-input>
+  <single-demo label="配置error message">
+    <y-input error error-message="校验失败，这是提示语句"></y-input>
+  </single-demo>
+  <single-demo label="配置help text">
+    <y-input help-text="这是辅助文案，请在合适的位置使用"></y-input>
+  </single-demo>
+  <single-demo label="配置help slot">
+    <y-input><template v-slot:help>这是辅助文案，请在合适的位置使用</template></y-input>
+  </single-demo>
+  <single-demo label="配置error message">
+    <y-input type="textarea" error error-message="校验失败，这是提示语句"></y-input>
+  </single-demo>
+  <single-demo label="配置help text">
+    <y-input type="textarea" help-text="这是辅助文案，请在合适的位置使用"></y-input>
+  </single-demo>
+  <single-demo label="配置help slot">
+    <y-input type="textarea"><template v-slot:help>这是辅助文案，请在合适的位置使用</template></y-input>
+  </single-demo>
 </template>
 
 ```
@@ -183,22 +233,26 @@ export default defineComponent({
 
 
 
-## Restriction
+## 校验
 
 <code-wrapper>
 <div class="code-source"><InputRestriction /></div>
 
  ```vue
 <template>
-  <y-input
-    placeholder="Please input number"
-    restriction="number">
-  </y-input>
-  <y-input
-    placeholder="Please input number"
-    restriction-type="value"
-    :restriction="restriction">
-  </y-input>
+  <single-demo label="仅输入数字">
+    <y-input
+      placeholder="Please input number"
+      restriction="number">
+    </y-input>
+  </single-demo>
+  <single-demo label="自定义配置">
+    <y-input
+      placeholder="Please input number"
+      restriction-type="value"
+      :restriction="restriction">
+    </y-input>
+  </single-demo>
 </template>
 
 <script>
@@ -225,27 +279,33 @@ export default defineComponent({
 
 
 
-## Numeric
+## 数字输入框
 
 <code-wrapper>
 <div class="code-source"><InputNumeric /></div>
 
  ```vue
 <template>
-  <y-input v-model="value11" type="numeric"></y-input>
-  <y-input v-model="value12" type="numeric" :precision="2">
-    <template v-slot:help>Input tip: value precision is 2</template>
-  </y-input>
-  <y-input v-model="value13" type="numeric" :precision="2" :max="99.98" :min="2">
-    <template v-slot:help>Input tip: min value: 2, max value: 99.98, precision is 2</template>
-  </y-input>
+  <single-demo label="基础">
+    <y-input v-model="value11" type="numeric"></y-input>
+  </single-demo>
+  <single-demo label="配置精度">
+    <y-input v-model="value12" type="numeric" :precision="2">
+      <template v-slot:help>Input tip: value precision is 2</template>
+    </y-input>
+  </single-demo>
+  <single-demo label="配置最值">
+    <y-input v-model="value13" type="numeric" :precision="2" :max="99.98" :min="2">
+      <template v-slot:help>Input tip: min value: 2, max value: 99.98, precision is 2</template>
+    </y-input>
+  </single-demo>
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, reactive, toRefs } from 'vue';
 
 export default defineComponent({
-  name: "Type",
+  name: 'Type',
 
   setup() {
     const state = reactive({
@@ -255,7 +315,7 @@ export default defineComponent({
     });
 
     return toRefs(state);
-  }
+  },
 });
 </script>
 
@@ -265,21 +325,25 @@ export default defineComponent({
 
 
 
-## Group
+## 分组
 
 <code-wrapper>
 <div class="code-source"><InputGroup /></div>
 
  ```vue
 <template>
-  <y-input-group>
-    <y-input style="width: 120px;"></y-input>
-    <y-input style="width: calc(100% - 120px);"></y-input>
-  </y-input-group>
-  <y-input-group>
-    <y-input style="width: 40%;"></y-input>
-    <y-input style="width: 60%;"></y-input>
-  </y-input-group>
+  <single-demo label="输入框组合">
+    <y-input-group>
+      <y-input style="width: 80px"></y-input>
+      <y-input style="width: calc(100% - 80px)"></y-input>
+    </y-input-group>
+  </single-demo>
+  <single-demo label="输入框组合">
+    <y-input-group>
+      <y-input style="width: 40%"></y-input>
+      <y-input style="width: 60%"></y-input>
+    </y-input-group>
+  </single-demo>
 </template>
 
 ```
@@ -287,24 +351,6 @@ export default defineComponent({
 </code-wrapper>
 
 
-
-<style lang="scss">
-.input-pages .yoga-input {
-  display: block;
-  width: 360px;
-  margin-bottom: 12px;
-}
-.input-pages .yoga-input__group {
-  width: 360px;
-  margin-bottom: 12px;
-
-  .yoga-input {
-    display: inline-block;
-    width: auto;
-    margin-bottom: 0;
-  }
-}
-</style>
 
 
 <script>
@@ -338,7 +384,7 @@ export default {
 
 ## API
 
-### Input props
+**Input props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | type | the type of input | String | native type and `textarea` / `numeric` | `text` |
@@ -375,7 +421,7 @@ export default {
 | is-round | wether use Number.toFixed or direct intercept, only works for type=numeric  | Boolean | - | true(means direct intercept) |
 | unicode-normalized| whether to calculate the string by utf-16, instead of the default utf-8 | Boolean | - | `false` |
 
-### Input slot
+**Input slot**
 All input slots and following
 | Slot | Description  |
 |:--|:--|
@@ -384,19 +430,19 @@ All input slots and following
 | error | the error message of input |
 | help | the help message of input |
 
-### Input events
+**Input events**
 All native input events and following
 | Event | Description | Parameters |
 |:--|:--|:--|
 | value-change | the change event of input value | the value |
 
 
-### InputGroup props
+**InputGroup props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | prepend-width | the width of prepend | Number | - | 120 |
 
-### InputGroup slot
+**InputGroup slot**
 All input slots and following
 | Slot | Description  |
 |:--|:--|

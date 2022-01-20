@@ -1,13 +1,17 @@
 <template>
-  <y-input
-    placeholder="Please input number"
-    restriction="number">
-  </y-input>
-  <y-input
-    placeholder="Please input number"
-    restriction-type="value"
-    :restriction="restriction">
-  </y-input>
+  <single-demo label="仅输入数字">
+    <y-input
+      placeholder="Please input number"
+      restriction="number">
+    </y-input>
+  </single-demo>
+  <single-demo label="自定义配置">
+    <y-input
+      placeholder="Please input number"
+      restriction-type="value"
+      :restriction="restriction">
+    </y-input>
+  </single-demo>
 </template>
 
 <script>

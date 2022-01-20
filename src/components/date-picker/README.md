@@ -1,6 +1,6 @@
 ## API
 
-### DatePicker props
+**DatePicker props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | modelValue | the value of date picker | Date, Object | if `type` is `week`,`daterange`, `monthrange` or `yearrange`, the value is an object that contains `endDate` and `startDate`, eg `{startDate: ..., endDate: ...}`, otherwise the value is a Date Object | - |
@@ -31,12 +31,12 @@
 }
 ```
 
-### DatePicker events
+**DatePicker events**
 | Property | Description | Parameters |
 |:--|:--|:--|
 | change | triggers when input value changed | 	formatted value |
 
-### DatePicker slots
+**DatePicker slots**
 | Property | Description | Parameters |
 |:--|:--|:--|
 | date-cell | customized date cell | `dateCell` |
@@ -57,8 +57,7 @@
 }
 ```
 
-
-### DatePickerPanel props
+**DatePickerPanel props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | value | value of picker | Date | - | - |
@@ -69,12 +68,12 @@
 | show-overflow-date | whether show the date out of current calendar | Boolean | - | `false` |
 | start-of-week | the start of week, 0 stands for Sunday and 6 stands for Saturday | Number | - | `0` |
 
-### DatePickerPanel events
+**DatePickerPanel events**
 | Property | Description | Parameters |
 |:--|:--|:--|
 | change | triggers when picker value changes | selected date/range |
 
-### DaterangePickerPanel props
+**DaterangePickerPanel props**
 all of props of DatePickerPanel and following
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
@@ -85,7 +84,7 @@ all of props of DatePickerPanel and following
 | fixed | whether any or which end of `value` if fixed | Boolean, String | `false`/`start`/`end` | `false` |
 | range-separator | range separator, only effective when `type` contains `range` | String | - | `-` |
 
-### DaterangePickerPanel events
+**DaterangePickerPanel events**
 all of events of DatePickerPanel and following
 | Property | Description | Parameters |
 |:--|:--|:--|

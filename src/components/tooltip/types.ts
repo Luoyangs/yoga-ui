@@ -1,6 +1,6 @@
-import { ExtractPropTypes, PropType } from 'vue';
-import { Placement } from '@popperjs/core';
 import { popperProps } from '@components/popper';
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { Placement } from '@popperjs/core';
 
 export const tooltipProps = {
   ...popperProps,

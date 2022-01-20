@@ -1,6 +1,6 @@
 ## API
 
-### Popper props
+**Popper props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | visible | the visible of popover, will override trigger and turn on manual mode | Boolean | - | `undefined` |
@@ -22,7 +22,7 @@
 | auto-close | auto close popper, 0 means do not use auto close | Number | - | `0` |
 | transition | popper transition name | String | - | `yoga-fade-in-linear` |
 
-### Events
+**Events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | after-enter | trigger after mouse enter popover | - |
@@ -30,7 +30,7 @@
 | before-enter | trigger before mouse enter popover | - |
 | before-leave | trigger before mouse leave popover | - |
 
-### Slots
+**Slots**
 | Name | Description | Parameters |
 |:--|:--|:--|
 | default | popper display element | - |

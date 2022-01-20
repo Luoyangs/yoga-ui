@@ -37,6 +37,10 @@ $min-width-maps: ("large": $large-min-with, "normal": $default-min-with, "small"
       &.yoga-button--link {
         min-width: unset;
       }
+
+      &.yoga-button--pure {
+        min-width: unset;
+      }
     }
   }
 }

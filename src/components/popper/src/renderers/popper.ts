@@ -1,7 +1,7 @@
 import { withDirectives, Transition, vShow, withCtx, h } from 'vue';
-import type { CSSProperties, Ref, VNode } from 'vue';
 import { NOOP } from '@vue/shared';
 import { Theme } from '@components/popper/types';
+import type { CSSProperties, Ref, VNode } from 'vue';
 
 interface RenderPopperProps {
   theme: Theme;

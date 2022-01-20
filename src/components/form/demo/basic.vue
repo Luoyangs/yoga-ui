@@ -10,7 +10,7 @@
       </y-radio>
     </y-form-item>
     <y-form-item prop="input" label="Input Value">
-      <input name="radio-demo" v-model="formModel.input" />
+      <y-input name="radio-demo" v-model="formModel.input" />
     </y-form-item>
     <y-button @click="handleCancel"> 取消 </y-button>
     <y-button type="primary" @click="handlePost"> 提交 </y-button>

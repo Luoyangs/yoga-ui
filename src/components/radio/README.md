@@ -1,6 +1,6 @@
 ## API
 
-### Radio props
+**Radio props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | modelValue | the value bind to v-model | String, Number, Boolean | - | - |
@@ -8,12 +8,12 @@
 | name | the native name of radio | String | - | - |
 | disabled | whether the radio is disabled | Boolean | - | `false` |
 
-### Radio events
+**Radio events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | change | trigger when the value change | the value |
 
-### RadioGroup props
+**RadioGroup props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | modelValue | the value bind to v-model | String, Number, Boolean | - | - |
@@ -22,7 +22,7 @@
 | type | the type of radio button | String | `solid`/`outline` | - |
 | disabled | whether the radio group is disabled | Boolean | - | `false` |
 
-### RadioGroup events
+**RadioGroup events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | change | trigger when the value change | the value |

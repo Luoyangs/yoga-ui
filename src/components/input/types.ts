@@ -1,6 +1,7 @@
-import { ExtractPropTypes, PropType, Ref, ComputedRef } from 'vue';
-import { YUISize, YUI_SIZE } from '@base';
-import { FormItemContext } from '@components/form/types';
+import { UI_SIZE } from '@base';
+import type { ExtractPropTypes, PropType, Ref, ComputedRef } from 'vue';
+import type { UISize } from '@base';
+import type { FormItemContext } from '@components/form/types';
 
 export type AutoSize = { minRows?: number; maxRows?: number };
 export const RESTRICTION_TYPE = {
@@ -21,9 +22,9 @@ export const inputProps = {
     validator: (value): boolean => ['text', 'textarea', 'password', 'numeric'].indexOf(value) >= 0,
   },
   size: {
-    type: String as PropType<YUISize>,
+    type: String as PropType<UISize>,
     default: 'normal',
-    validator: (value: string): boolean => YUI_SIZE.indexOf(value) >= 0,
+    validator: (value: string): boolean => UI_SIZE.indexOf(value) >= 0,
   },
   name: String,
   placeholder: String,

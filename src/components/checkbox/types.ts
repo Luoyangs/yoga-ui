@@ -1,6 +1,7 @@
-import { Ref, ExtractPropTypes, PropType, ComputedRef } from 'vue';
-import { YUISize, YUI_SIZE } from '@base';
-import { IModelType } from '@components/radio/types';
+import { UI_SIZE } from '@base';
+import type { Ref, ExtractPropTypes, PropType, ComputedRef } from 'vue';
+import type { UISize } from '@base';
+import type { IModelType } from '@components/radio/types';
 
 type IModelValue = boolean | string | number;
 
@@ -41,13 +42,13 @@ export interface UseCheckbox {
 export const checkboxGroupProps = {
   modelValue: {
     type: Array as PropType<Array<IModelType>>,
-    default: (): IModelType[] => []
+    default: (): IModelType[] => [],
   },
   vertical: Boolean,
   size: {
-    type: String as PropType<YUISize>,
+    type: String as PropType<UISize>,
     default: 'normal',
-    validator: (value: string = 'normal'): boolean => YUI_SIZE.indexOf(value) >= 0,
+    validator: (value: string = 'normal'): boolean => UI_SIZE.indexOf(value) >= 0,
   },
   type: {
     type: String,
@@ -55,7 +56,7 @@ export const checkboxGroupProps = {
   },
   disabled: Boolean,
   fixedWidth: Number, // 固定每一个checkbox的宽度
-}
+};
 
 export interface CheckboxEventParams {
   /** checkbox props value */

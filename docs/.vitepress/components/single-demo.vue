@@ -40,14 +40,15 @@ export default defineComponent({
   }
 
   .single-label {
-    font-size: 14px;
-    color: #333;
     margin-right: 8px;
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
   }
 
   .single-slot {
     width: 100%;
-    max-width: 240px;
+    max-width: 260px;
   }
 }
 </style>

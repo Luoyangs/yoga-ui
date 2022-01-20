@@ -1,7 +1,5 @@
-# Checkbox
 
-
-## Base
+## 基础模式
 
 <code-wrapper>
 <div class="code-source"><CheckboxBase /></div>
@@ -33,7 +31,7 @@ export default defineComponent({
 
 
 
-## Indeterminate
+## 局部选中态
 
 <code-wrapper>
 <div class="code-source"><CheckboxIndeterminate /></div>
@@ -95,7 +93,7 @@ export default defineComponent({
 
 
 
-## Disabled
+## 禁用态
 
 <code-wrapper>
 <div class="code-source"><CheckboxDisabled /></div>
@@ -154,7 +152,7 @@ export default defineComponent({
 
 
 
-## Group
+## 分组
 
 <code-wrapper>
 <div class="code-source"><CheckboxGroup /></div>
@@ -218,7 +216,7 @@ export default defineComponent({
 
 
 
-## Size
+## 不同尺寸
 
 <code-wrapper>
 <div class="code-source"><CheckboxSize /></div>
@@ -292,7 +290,7 @@ export default defineComponent({
 
 
 
-## Fixed-width
+## 固定宽度
 
 <code-wrapper>
 <div class="code-source"><CheckboxFixedWidth /></div>
@@ -370,7 +368,7 @@ export default {
 
 ## API
 
-### Checkbox props
+**Checkbox props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | modelValue | the v-model bind value of checkbox | String, Number, Boolean | - | null |
@@ -379,13 +377,13 @@ export default {
 | disabled | whether the checkbox is disabled | Boolean | - | `false` |
 | indeterminate | same as indeterminate in native checkbox | Boolean | - | `false` |
 
-### Checkbox events
+**Checkbox events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | change | trigger when the value change | the value |
 | update:modelValue | trigger when the value change | the value |
 
-### CheckboxGroup props
+**CheckboxGroup props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | modelValue | the v-model bind value of checkbox group| Array | - | [] |
@@ -395,7 +393,7 @@ export default {
 | disabled | whether the checkbox group is disabled | Boolean | - | `false` |
 | fixed-width | fix checkbox item label width | Number | - | - |
 
-### CheckboxGroup events
+**CheckboxGroup events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | change | trigger when the value change | the value |

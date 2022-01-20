@@ -5,7 +5,7 @@
         :label="`Student ${index + 1}`"
         :prop="`students[${index}].name`"
       >
-        <input v-model="student.name" />
+        <y-input v-model="student.name" />
         <y-button @click="handleDeleteStudent(index)">Delete</y-button>
       </y-form-item>
     </template>

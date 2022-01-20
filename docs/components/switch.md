@@ -1,7 +1,5 @@
-# Switch
 
-
-## Base
+## 基础模式
 
 <code-wrapper>
 <div class="code-source"><SwitchBase /></div>
@@ -40,7 +38,7 @@ export default defineComponent({
 
 
 
-## Disabled
+## 禁用态
 
 <code-wrapper>
 <div class="code-source"><SwitchDisabled /></div>
@@ -65,7 +63,7 @@ export default defineComponent({
 
 
 
-## Size
+## 不同尺寸
 
 <code-wrapper>
 <div class="code-source"><SwitchSize /></div>
@@ -107,7 +105,7 @@ export default defineComponent({
 
 
 
-## Custom
+## 自定义标签
 
 <code-wrapper>
 <div class="code-source"><SwitchCustom /></div>
@@ -158,7 +156,7 @@ export default {
 
 ## API
 
-### Switch props
+**Switch props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | modelValue | the value of switch, bind with `v-model` | Boolean | - | - |
@@ -167,7 +165,7 @@ export default {
 | active-text | the text when switch on | String | - | -` |
 | inactive-text | the text when switch off | String | - | - |
 
-### Switch events
+**Switch events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | change | the change event of switch | current value |

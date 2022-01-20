@@ -24,12 +24,7 @@ module.exports = {
         }
 
         md.__data = {}
-        const html = render.call(md, src)
-        const matches = html.match(/<h1 id="([a-zA-Z-]+)"/) // 获取当前页面h1标签id
-        if (matches) {
-          return `<div class="page-container ${matches[1]}-pages">${html}</div>`
-        }
-        return html
+        return render.call(md, src)
       };
       md.render = wrappedRender;
       return md;

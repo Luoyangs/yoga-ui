@@ -6,6 +6,8 @@ node_modules
 dist
 # don't lint nyc coverage output
 coverage
+# don't lint svg icon
+src/base/icons/*
 
 # disable .(s)css eslint check
 *.css

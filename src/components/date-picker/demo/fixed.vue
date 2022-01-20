@@ -1,49 +1,49 @@
 <template>
-  <single-demo label="fixed start date range">
+  <single-demo label="固定起始日期">
     <y-date-picker
       type="daterange"
       fixed="start"
-      placeholder="fixed start date range"
+      placeholder="请选择日期范围"
       v-model="startRange" />
   </single-demo>
 
-  <single-demo label="fixed end date range">
+  <single-demo label="固定结束日期">
     <y-date-picker
       type="daterange"
       fixed="end"
-      placeholder="fixed end date range"
+      placeholder="请选择日期范围"
       v-model="endRange" />
   </single-demo>
 
-  <single-demo label="fixed start month range">
+  <single-demo label="固定起始月份">
     <y-date-picker
       type="monthrange"
       fixed="start"
-      placeholder="fixed start month range"
+      placeholder="请选择日期范围"
       v-model="startMonthRange" />
   </single-demo>
 
-  <single-demo label="fixed end month range">
+  <single-demo label="固定结束月份">
     <y-date-picker
       type="monthrange"
       fixed="end"
-      placeholder="fixed end month range"
+      placeholder="请选择日期范围"
       v-model="endMonthRange" />
   </single-demo>
 
-  <single-demo label="fixed start year range">
+  <single-demo label="固定起始年份">
     <y-date-picker
       type="yearrange"
       fixed="start"
-      placeholder="fixed start year range"
+      placeholder="请选择日期范围"
       v-model="startYearRange" />
   </single-demo>
 
-  <single-demo label="fixed end year range">
+  <single-demo label="固定结束年份">
     <y-date-picker
       type="yearrange"
       fixed="end"
-      placeholder="fixed end year range"
+      placeholder="请选择日期范围"
       v-model="endYearRange" />
   </single-demo>
 </template>

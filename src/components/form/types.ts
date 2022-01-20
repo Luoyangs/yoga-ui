@@ -1,8 +1,9 @@
-import { ExtractPropTypes, PropType } from 'vue';
-import { RuleItem } from 'async-validator';
-import { Emitter } from 'mitt';
-import { YUISize, YUI_SIZE } from '@base';
+import { UI_SIZE } from '@base';
 import { noop } from '@components/form/src/util';
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { Emitter } from 'mitt';
+import type { RuleItem } from 'async-validator';
+import type { UISize } from '@base';
 
 export declare interface FormItemRule extends RuleItem {
   trigger?: string;
@@ -30,9 +31,9 @@ export const formProps = {
     validator: (value) => ['right', 'left', 'top'].includes(value),
   },
   size: {
-    type: String as PropType<YUISize>,
+    type: String as PropType<UISize>,
     default: 'normal',
-    validator: (value) => YUI_SIZE.includes(value),
+    validator: (value) => UI_SIZE.includes(value),
   },
   showMessage: {
     type: Boolean,
@@ -74,9 +75,9 @@ export const formItemProps = {
   for: String,
   required: Boolean,
   size: {
-    type: String as PropType<YUISize>,
+    type: String as PropType<UISize>,
     default: 'normal',
-    validator: (value) => YUI_SIZE.includes(value),
+    validator: (value) => UI_SIZE.includes(value),
   },
   labelWidth: Number,
   showMessage: {
@@ -120,9 +121,7 @@ export interface ErrorHandlerConfig {
   };
 }
 
-export type ValidateCallbackType =
-  | ((arg: ValidateCallback) => void)
-  | ErrorHandlerConfig;
+export type ValidateCallbackType = ((arg: ValidateCallback) => void) | ErrorHandlerConfig;
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 export type ValidatorFn = (value: any, model: any) => Promise<boolean | Error>;
 export type AsyncValidatorFn = (

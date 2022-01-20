@@ -1,6 +1,6 @@
 ## API
 
-### Switch props
+**Switch props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | modelValue | the value of switch, bind with `v-model` | Boolean | - | - |
@@ -9,7 +9,7 @@
 | active-text | the text when switch on | String | - | -` |
 | inactive-text | the text when switch off | String | - | - |
 
-### Switch events
+**Switch events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | change | the change event of switch | current value |

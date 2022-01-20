@@ -1,7 +1,5 @@
-# Radio
 
-
-## Basic
+## 基本模式
 
 <code-wrapper>
 <div class="code-source"><RadioBasic /></div>
@@ -79,7 +77,7 @@ export default defineComponent({
 
 
 
-## Group
+## 分组模式
 
 <code-wrapper>
 <div class="code-source"><RadioGroup /></div>
@@ -152,7 +150,7 @@ export default defineComponent({
 
 
 
-## Size
+## 不同尺寸
 
 <code-wrapper>
 <div class="code-source"><RadioSize /></div>
@@ -231,7 +229,7 @@ export default defineComponent({
 
 
 
-## Disabled
+## 禁用态
 
 <code-wrapper>
 <div class="code-source"><RadioDisabled /></div>
@@ -311,7 +309,7 @@ export default {
 
 ## API
 
-### Radio props
+**Radio props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | modelValue | the value bind to v-model | String, Number, Boolean | - | - |
@@ -319,12 +317,12 @@ export default {
 | name | the native name of radio | String | - | - |
 | disabled | whether the radio is disabled | Boolean | - | `false` |
 
-### Radio events
+**Radio events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | change | trigger when the value change | the value |
 
-### RadioGroup props
+**RadioGroup props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | modelValue | the value bind to v-model | String, Number, Boolean | - | - |
@@ -333,7 +331,7 @@ export default {
 | type | the type of radio button | String | `solid`/`outline` | - |
 | disabled | whether the radio group is disabled | Boolean | - | `false` |
 
-### RadioGroup events
+**RadioGroup events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | change | trigger when the value change | the value |

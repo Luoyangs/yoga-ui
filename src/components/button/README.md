@@ -1,6 +1,6 @@
 ## API
 
-### Button props
+**Button props**
 
 | Property    | Description                                        | Type    | Accepted Values                          | Default  |
 | :---------- | :------------------------------------------------- | :------ | :--------------------------------------- | :------- |
@@ -20,7 +20,7 @@
 | href        | render button as the HTMLElement a label           | String  | -                                        | -        |
 | target      | only works href support, the attr of HTMLElement a | String  | -                                        | -        |
 
-### Button events
+**Button events**
 
 | Event | Description               | Parameters   |
 | :---- | :------------------------ | :----------- |

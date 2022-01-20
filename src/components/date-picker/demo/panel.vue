@@ -1,10 +1,10 @@
 <template>
-  <single-demo label="date panel">
-    <y-date-picker-panel placeholder="pick date" v-model="value" />
+  <single-demo label="日期面板">
+    <y-date-picker-panel v-model="value" />
   </single-demo>
 
-  <single-demo label="date range panel">
-    <y-daterange-picker-panel placeholder="pick date" v-model="range" />
+  <single-demo label="日期范围面板">
+    <y-daterange-picker-panel v-model="range" />
   </single-demo>
 
 </template>

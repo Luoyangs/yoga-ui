@@ -1,49 +1,49 @@
 <template>
-  <single-demo label="date picker">
+  <single-demo label="选择单个日期">
     <y-date-picker
-      placeholder="default"
+      placeholder="默认类型"
       v-model="value" />
   </single-demo>
 
-  <single-demo label="year picker">
+  <single-demo label="年选择器">
     <y-date-picker
     type="year"
-    placeholder="pick year"
+    placeholder="年选择器"
     v-model="year" />
   </single-demo>
 
-  <single-demo label="month picker">
+  <single-demo label="月选择器">
     <y-date-picker
       type="month"
-      placeholder="pick month"
+      placeholder="月选择器"
       v-model="month" />
   </single-demo>
 
-  <single-demo label="week picker">
+  <single-demo label="周选择器">
     <y-date-picker
       type="week"
-      placeholder="pick week"
+      placeholder="周选择器"
       v-model="week" />
   </single-demo>
 
-  <single-demo label="date range picker">
+  <single-demo label="日期范围选择器">
     <y-date-picker
       type="daterange"
-      placeholder="pick date range"
+      placeholder="日期范围选择器"
       v-model="range" />
   </single-demo>
 
-  <single-demo label="month range">
+  <single-demo label="月范围选择器">
     <y-date-picker
       type="monthrange"
-      placeholder="pick month range"
+      placeholder="月范围选择器"
       v-model="monthrange" />
   </single-demo>
 
-  <single-demo label="year range picker">
+  <single-demo label="年范围选择器">
     <y-date-picker
       type="yearrange"
-      placeholder="pick year range"
+      placeholder="年范围选择器"
       v-model="yearrange" />
   </single-demo>
 </template>

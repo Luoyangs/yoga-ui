@@ -1,7 +1,7 @@
-import { YUI_SIZE } from '@base';
+import { UI_SIZE } from '@base';
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { Placement } from '@popperjs/core';
-import type { YUISize } from '@base';
+import type { UISize } from '@base';
 import type { IDateRange } from '@components/date-picker/src/renderers/table-date/types';
 
 export const datePickerProps = {
@@ -14,9 +14,9 @@ export const datePickerProps = {
     default: 'date',
   },
   size: {
-    type: String as PropType<YUISize>,
+    type: String as PropType<UISize>,
     default: 'normal',
-    validator: (value: string = 'normal'): boolean => YUI_SIZE.indexOf(value) >= 0,
+    validator: (value: string = 'normal'): boolean => UI_SIZE.indexOf(value) >= 0,
   },
   clearable: {
     type: Boolean,

@@ -1,6 +1,4 @@
-# Radio
-
-<!-- basic -->
-<!-- group -->
-<!-- size -->
-<!-- disabled -->
+<!-- basic(基本模式) -->
+<!-- group(分组模式) -->
+<!-- size(不同尺寸) -->
+<!-- disabled(禁用态) -->

@@ -1,11 +1,11 @@
-import { YUISize } from '@base';
+import { UISize } from '@base';
 
 export type ButtonType = 'primary' | 'secondary' | 'link';
 export type ButtonNativeType = 'button' | 'reset' | 'submit';
 
 export interface ButtonProps {
   type?: ButtonType;
-  size?: YUISize;
+  size?: UISize;
   outline?: boolean;
   fullWidth?: boolean;
   dashed?: boolean;

@@ -1,40 +1,31 @@
-import {
-  h,
-  computed,
-  defineComponent,
-  ref,
-  toRefs,
-  provide,
-  reactive,
-  SetupContext,
-} from "vue";
-import {
+import { h, computed, defineComponent, ref, toRefs, provide, reactive } from 'vue';
+import { formProps, FormKey } from '@components/form/types';
+import { getFieldsByPaths, noop } from '@components/form/src/util';
+import mitt from 'mitt';
+import { isFunction, isPlainObject } from '@utils/helper';
+import type { SetupContext } from 'vue';
+import type {
   FormEvent,
   FormItemContext,
   FormProps,
-  formProps,
   ValidateCallback,
-  FormKey,
   ErrorHandlerConfig,
   ValidateCallbackType,
-} from "@components/form/types";
-import { getFieldsByPaths, noop } from "@components/form/src/util";
-import mitt from "mitt";
-import { isFunction, isPlainObject } from "@utils/helper";
+} from '@components/form/types';
 
 export default defineComponent({
-  name: "YForm",
+  name: 'YForm',
   props: formProps,
-  emits: ["validate"],
+  emits: ['validate'],
   setup(props: FormProps, { emit }: SetupContext) {
     const formMitt = mitt<FormEvent>();
     const fields = ref<FormItemContext[]>([]);
 
     const formClass = computed(() => {
       return [
-        "yoga-form",
-        props.inline ? "yoga-form--inline" : "",
-        props.labelAlign ? "yoga-form--label-" + props.labelAlign : "",
+        'yoga-form',
+        props.inline ? 'yoga-form--inline' : '',
+        props.labelAlign ? 'yoga-form--label-' + props.labelAlign : '',
       ];
     });
 
@@ -70,7 +61,7 @@ export default defineComponent({
 
         let count = 0;
         fields.forEach((field, index) => {
-          field.validate("", (res) => {
+          field.validate('', (res) => {
             if (!res) {
               valid = false;
               invalidFields[index] = field;
@@ -98,25 +89,16 @@ export default defineComponent({
       });
     };
     // public form校验
-    const validate = (
-      callback: (arg: ValidateCallback) => void = noop,
-      errorHandler: ErrorHandlerConfig
-    ) => {
+    const validate = (callback: (arg: ValidateCallback) => void = noop, errorHandler: ErrorHandlerConfig) => {
       return handleValidate(fields.value, callback, errorHandler);
     };
     const clearValidate = () => {
       handleClearValidate(fields.value);
     };
-    const validateFields = (
-      props: string | string[],
-      callback: (arg: ValidateCallback) => void,
-      errorHandler
-    ) => {
+    const validateFields = (props: string | string[], callback: (arg: ValidateCallback) => void, errorHandler) => {
       const mFields = getFieldsByPaths(fields.value, props);
       if (mFields.length === 0) {
-        console.warn(
-          "[YogaUI warn][Form]: should call validateFields with valid prop string"
-        );
+        console.warn('[YogaUI warn][Form]: should call validateFields with valid prop string');
       }
 
       return handleValidate(fields.value, callback, errorHandler);
@@ -124,21 +106,19 @@ export default defineComponent({
     const clearValidateFields = (props: string | string[]) => {
       const mFields = getFieldsByPaths(fields.value, props);
       if (mFields.length === 0) {
-        console.warn(
-          "[YogaUI warn][Form]: should call validateFields with valid prop string"
-        );
+        console.warn('[YogaUI warn][Form]: should call validateFields with valid prop string');
       }
 
       handleClearValidate(fields.value);
     };
     /************************** methods ends ***************************/
 
-    formMitt.on("addField", (field) => {
+    formMitt.on('addField', (field) => {
       if (field.prop) {
         fields.value.push(field);
       }
     });
-    formMitt.on("removeField", (field) => {
+    formMitt.on('removeField', (field) => {
       const index = fields.value.indexOf(field);
       if (index > -1) {
         fields.value.splice(index, 1);

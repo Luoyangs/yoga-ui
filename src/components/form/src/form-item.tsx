@@ -4,7 +4,6 @@ import {
   defineComponent,
   ref,
   watch,
-  SetupContext,
   onMounted,
   reactive,
   toRefs,
@@ -12,55 +11,42 @@ import {
   inject,
   provide,
   renderSlot,
-} from "vue";
-import {
+} from 'vue';
+import mitt from 'mitt';
+import { formItemProps, FormKey, FormItemKey } from '@components/form/types';
+import { noop, getModelByPath, getRulesByPath } from '@components/form/src/util';
+import { debounce, isArray, isFunction, isPlainObject, NOOP, toTypeString } from '@utils/helper';
+import type { SetupContext } from 'vue';
+import type { Emitter } from 'mitt';
+import type {
   AsyncValidatorFn,
   FormContext,
   FormItemEvent,
-  formItemProps,
   FormItemProps,
-  FormKey,
-  FormItemKey,
   FormRule,
   ValidatorFn,
-} from "@components/form/types";
-import {
-  noop,
-  getModelByPath,
-  getRulesByPath,
-} from "@components/form/src/util";
-import {
-  debounce,
-  isArray,
-  isFunction,
-  isPlainObject,
-  NOOP,
-} from "@utils/helper";
-import mitt, { Emitter } from "mitt";
+} from '@components/form/types';
 
 export default defineComponent({
-  name: "YFormItem",
+  name: 'YFormItem',
   props: formItemProps,
   setup(props: FormItemProps, { slots }: SetupContext) {
     const error = ref<boolean>(false);
-    const errorMessage = ref<string>("");
-    const validateTrigger = ref<string>("");
+    const errorMessage = ref<string>('');
+    const validateTrigger = ref<string>('');
     const formItemMitt: Emitter<FormItemEvent> = mitt();
     const formEl = inject(FormKey, {} as FormContext);
 
     /************** computed attr *************/
     const formItemClass = computed(() => {
       return [
-        "yoga-form-item",
-        sizeClass.value ? `yoga-form-item--${sizeClass.value}` : "",
-        error ? "yoga-form-item--error" : "",
+        'yoga-form-item',
+        sizeClass.value ? `yoga-form-item--${sizeClass.value}` : '',
+        error ? 'yoga-form-item--error' : '',
       ];
     });
     const formItemLabelClass = computed(() => {
-      return [
-        "yoga-form-item__label",
-        (props.label || slots.label?.()) ?? "empty",
-      ];
+      return ['yoga-form-item__label', (props.label || slots.label?.()) ?? 'empty'];
     });
     const labelFor = computed(() => props.for || props.prop);
     const sizeClass = computed(() => props.size || formEl.size);
@@ -71,9 +57,7 @@ export default defineComponent({
         $parent: parent,
       };
     });
-    const filedRules = computed(
-      () => props.rules || getRulesByPath(formEl.rules, props.prop)
-    );
+    const filedRules = computed(() => props.rules || getRulesByPath(formEl.rules, props.prop));
     const activeRules = computed(() => {
       let rules = filedRules.value as FormRule[];
       rules = isArray(rules) ? rules : [rules];
@@ -84,7 +68,7 @@ export default defineComponent({
         }
 
         if (rule.trigger === undefined) {
-          rule.trigger = formEl.validateTrigger || "";
+          rule.trigger = formEl.validateTrigger || '';
         }
 
         return triggerFilter(rule, validateTrigger.value);
@@ -93,16 +77,14 @@ export default defineComponent({
     const validators = computed(() => {
       return activeRules.value
         .map((rule) => {
-          const validator = Object.values(rule).find((n) =>
-            isFunction(n)
-          ) as ValidatorFn;
+          const validator = Object.values(rule).find((n) => isFunction(n)) as ValidatorFn;
           if (!validator) {
             console.warn(
               `[YogaUI warn][Form]: should define a validate function in rules for form item: ${props.prop}`
             );
             return false;
           }
-          console.log("validator", validator);
+          console.log('validator', validator);
 
           return genAsyncValidator(validator, rule.message as string);
         })
@@ -117,24 +99,22 @@ export default defineComponent({
       if (!rule.trigger || !trigger) {
         return true;
       }
-      console.log("triggerFilter", rule.trigger);
+      console.log('triggerFilter', rule.trigger);
 
       if (isArray(rule.trigger)) {
         return rule.trigger.indexOf(trigger) > -1;
-      } else {
-        return rule.trigger === trigger;
       }
+      return rule.trigger === trigger;
     };
     const genAsyncValidator = (validator: ValidatorFn, message: string) => {
-      /* eslint-disable  @typescript-eslint/no-explicit-any */
+      /* eslint-disable-line */
       return async (...args: [/** value */ any, /** model */ any]) => {
         const res = await validator(...args);
-        const error =
-          !res || Object.prototype.toString.call(res) === "[object Error]";
+        const error = !res || toTypeString(res) === '[object Error]';
 
         return {
           error,
-          errorMessage: error ? (res as Error).message || message : "",
+          errorMessage: error ? (res as Error).message || message : '',
         };
       };
     };
@@ -152,11 +132,7 @@ export default defineComponent({
         const validator = validators[i];
         const { $model, $parent } = fieldValue.value;
 
-        const { error, errorMessage } = await validator(
-          $model,
-          $parent,
-          formEl.model
-        );
+        const { error, errorMessage } = await validator($model, $parent, formEl.model);
         if (error || i === length - 1) {
           return {
             error,
@@ -165,16 +141,13 @@ export default defineComponent({
         }
       }
     };
-    const validate = (
-      trigger?: string | typeof noop,
-      callback?: typeof noop
-    ): boolean | Promise<boolean> => {
+    const validate = (trigger?: string | typeof noop, callback?: typeof noop): boolean | Promise<boolean> => {
       if (isFunction(trigger)) {
         callback = trigger;
-        trigger = "";
+        trigger = '';
       } else if (isPlainObject(trigger)) {
         callback = NOOP;
-        trigger = "";
+        trigger = '';
       }
 
       validateTrigger.value = trigger;
@@ -191,7 +164,7 @@ export default defineComponent({
         handleValidate(validatorList).then(({ error, errorMessage }) => {
           updateError(error, errorMessage);
 
-          formEl.emit("validate", props.prop, !error, fieldValue.value.$model);
+          formEl.emit('validate', props.prop, !error, fieldValue.value.$model);
           // TODO: error handle: scroll to error
 
           resolve(!error);
@@ -202,7 +175,7 @@ export default defineComponent({
       });
     };
     const reset = () => {
-      updateError(false, "");
+      updateError(false, '');
     };
     const clearValidate = () => {
       reset();
@@ -211,21 +184,17 @@ export default defineComponent({
       reset();
     };
     const onFieldBlur = () => {
-      validate("blur");
+      validate('blur');
     };
     const onFieldChange = () => {
-      validate("change");
+      validate('change');
     };
 
     /************** computed attr *************/
     watch(
       () => filedRules,
       (value, oldValue) => {
-        if (
-          formEl.validateOnRuleChange &&
-          value !== oldValue &&
-          oldValue !== undefined
-        ) {
+        if (formEl.validateOnRuleChange && value !== oldValue && oldValue !== undefined) {
           validate();
         }
       }
@@ -239,16 +208,16 @@ export default defineComponent({
     });
     provide(FormItemKey, formItem);
     onMounted(() => {
-      formEl.formMitt.emit("addField", formItem);
+      formEl.formMitt.emit('addField', formItem);
 
       if (filedRules) {
-        formItemMitt.on("fieldFocus", onFieldFocus);
-        formItemMitt.on("fieldBlur", onFieldBlur);
-        formItemMitt.on("fieldChange", onFieldChange);
+        formItemMitt.on('fieldFocus', onFieldFocus);
+        formItemMitt.on('fieldBlur', onFieldBlur);
+        formItemMitt.on('fieldChange', onFieldChange);
       }
     });
     onBeforeUnmount(() => {
-      formEl.formMitt.emit("removeField", formItem);
+      formEl.formMitt.emit('removeField', formItem);
     });
 
     return {
@@ -267,34 +236,23 @@ export default defineComponent({
     };
   },
   render() {
-    const {
-      error,
-      errorMessage,
-      showError,
-      required,
-      label,
-      labelFor,
-      formItemClass,
-      formItemLabelClass,
-    } = this;
+    const { error, errorMessage, showError, required, label, labelFor, formItemClass, formItemLabelClass } = this;
     return (
       <div class={formItemClass}>
         <label for={labelFor.value} class={formItemLabelClass}>
           {required && <span class="yoga-form-item__required">*</span>}
-          {renderSlot(this.$slots, "label", undefined, () => [label])}
+          {renderSlot(this.$slots, 'label', undefined, () => [label])}
         </label>
         <div class="yoga-form-item__control">
           <div class="yoga-form-item__content">{this.$slots.default?.()}</div>
-          {renderSlot(this.$slots, "error", { error, errorMessage }, () => [
+          {renderSlot(this.$slots, 'error', { error, errorMessage }, () => [
             showError && (
               <transition name="slide-fast">
                 <div class="yoga-form-item__error">{errorMessage}</div>
               </transition>
             ),
           ])}
-          {this.$slots.extra && (
-            <div class="yoga-form-item__extra">{this.$slots.extra()}</div>
-          )}
+          {this.$slots.extra && <div class="yoga-form-item__extra">{this.$slots.extra()}</div>}
         </div>
       </div>
     );

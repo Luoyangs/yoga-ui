@@ -1,4 +1,3 @@
-# Popper
 > Popper借助[Popper.js](https://popper.js.org/)实现，主要作为其他组件的辅助类使用，尽量不要单独使用。由Popper派生的组件主要有下面几个：
 - Tooltip: 用于文字提示
 - Popover: 用于轻量级的Modal
@@ -283,7 +282,7 @@ export default {
 
 ## API
 
-### Popper props
+**Popper props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | visible | the visible of popover, will override trigger and turn on manual mode | Boolean | - | `undefined` |
@@ -305,7 +304,7 @@ export default {
 | auto-close | auto close popper, 0 means do not use auto close | Number | - | `0` |
 | transition | popper transition name | String | - | `yoga-fade-in-linear` |
 
-### Events
+**Events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | after-enter | trigger after mouse enter popover | - |
@@ -313,7 +312,7 @@ export default {
 | before-enter | trigger before mouse enter popover | - |
 | before-leave | trigger before mouse leave popover | - |
 
-### Slots
+**Slots**
 | Name | Description | Parameters |
 |:--|:--|:--|
 | default | popper display element | - |

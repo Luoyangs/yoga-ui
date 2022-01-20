@@ -1,20 +1,18 @@
-import { h, defineComponent, computed, reactive, inject, ref, unref, nextTick, withDirectives } from 'vue';
+import { h, defineComponent, computed, reactive, ref, unref, nextTick, withDirectives } from 'vue';
 import dayjs from 'dayjs';
 import { ClickOutside } from '@directives';
-import { UPDATE_MODEL_EVENT } from '@base';
-import CalendarIcon from '@base/icons/calendar';
-import { isArray, isFunction, isPlainObject } from '@utils/helper';
+import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@base';
+import CalendarIcon from '@base/icons/Calendar';
+import { isFunction, isPlainObject } from '@utils/helper';
 import { Input } from '@components/input';
 import { Popper } from '@components/popper';
 import { Theme } from '@components/popper/types';
-import { FormItemKey } from '@components/form/types';
 import DatePickerPanel from '@components/date-picker/src/renderers/panel-date-picker';
 import DaterangePickerPanel from '@components/date-picker/src/renderers/panel-daterange-picker';
 import { datePickerProps } from '@components/date-picker/types';
 import { DATETIME_FORMAT, DATE_FORMAT, MONTH_FORMAT, YEAR_FORMAT } from '@components/date-picker/src/constants';
 import type { SetupContext } from 'vue';
 import type { InputProps } from '@components/input/types';
-import type { FormItemContext } from '@components/form/types';
 import type { IDateRange } from '@components/date-picker/src/renderers/table-date/types';
 import type { DatePickerPanelProps } from '@components/date-picker/src/renderers/panel-date-picker';
 import type { DaterangePickerPanelProp } from '@components/date-picker/src/renderers/panel-daterange-picker/types';
@@ -23,13 +21,12 @@ import type { DatePickerProps, DatePickerType, IFormat, EmitType } from '@compon
 export default defineComponent({
   name: 'YDatePicker',
   props: datePickerProps,
-  emits: [UPDATE_MODEL_EVENT, 'change', 'range-input'],
+  emits: [UPDATE_MODEL_EVENT, CHANGE_EVENT, 'range-input'],
   setup(props: DatePickerProps, { emit }: SetupContext<EmitType[]>) {
     const refPopper = ref(null);
     const state = reactive({
       visible: false,
     });
-    const formItem = inject(FormItemKey, {} as FormItemContext);
     const popperPanelRef = computed(() => {
       return refPopper.value?.popperRef;
     });
@@ -37,7 +34,7 @@ export default defineComponent({
       const format = props.format;
       const type = props.type;
 
-      if (!!format) {
+      if (format) {
         return format;
       } else if (type.indexOf('time') > -1) {
         return DATETIME_FORMAT;
@@ -112,18 +109,16 @@ export default defineComponent({
 
       if (isFunction(format)) {
         label = format(value as Date);
-      } else {
-        if (type.indexOf('range') > -1 || type === 'week') {
-          const rangeDate = value as IDateRange;
+      } else if (type.indexOf('range') > -1 || type === 'week') {
+        const rangeDate = value as IDateRange;
 
-          if (rangeDate && rangeDate.startDate && rangeDate.endDate) {
-            label = `${dayjs(rangeDate.startDate).format(format)}${props.rangeSeparator}${dayjs(
-              rangeDate.endDate
-            ).format(format)}`;
-          }
-        } else {
-          label = dayjs(value as Date).format(format);
+        if (rangeDate && rangeDate.startDate && rangeDate.endDate) {
+          label = `${dayjs(rangeDate.startDate).format(format)}${props.rangeSeparator}${dayjs(rangeDate.endDate).format(
+            format
+          )}`;
         }
+      } else {
+        label = dayjs(value as Date).format(format);
       }
 
       return label;
@@ -140,7 +135,7 @@ export default defineComponent({
     };
 
     const onPickerChange = (value: IDateRange | Date) => {
-      emit('change', value);
+      emit(CHANGE_EVENT, value);
       // TODO: 更新FormItem event
     };
 

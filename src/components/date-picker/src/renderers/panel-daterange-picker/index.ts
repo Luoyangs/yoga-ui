@@ -1,5 +1,5 @@
 import { h, defineComponent, SetupContext } from 'vue';
-import { UPDATE_MODEL_EVENT } from '@base';
+import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@base';
 import { Button } from '@components/button';
 import DatePickerHeader from '@components/date-picker/src/renderers/picker-header';
 import DateTable from '@components/date-picker/src/renderers/table-date';
@@ -15,7 +15,7 @@ import type {
 export default defineComponent({
   name: 'YDaterangePickerPanel',
   props: datarangePickerProps,
-  emits: [UPDATE_MODEL_EVENT, 'change', 'range-input'],
+  emits: [UPDATE_MODEL_EVENT, CHANGE_EVENT, 'range-input'],
   setup(props: DaterangePickerPanelProp, context: SetupContext<EmitType[]>) {
     const prefixCls = 'yoga-daterange-picker-panel';
     const {

@@ -1,7 +1,5 @@
-# Button
 
-
-## Base
+## 基础按钮
 
 <code-wrapper>
 <div class="code-source"><ButtonBase /></div>
@@ -36,7 +34,7 @@ export default defineComponent({
 
 
 
-## Disabled
+## 禁用按钮
 
 <code-wrapper>
 <div class="code-source"><ButtonDisabled /></div>
@@ -71,7 +69,7 @@ export default defineComponent({
 
 
 
-## Dashed
+## 虚线按钮
 
 <code-wrapper>
 <div class="code-source"><ButtonDashed /></div>
@@ -104,7 +102,7 @@ export default defineComponent({
 
 
 
-## Circle
+## 圆形按钮
 
 <code-wrapper>
 <div class="code-source"><ButtonCircle /></div>
@@ -138,7 +136,7 @@ export default defineComponent({
 
 
 
-## Size
+## 按钮尺寸
 
 <code-wrapper>
 <div class="code-source"><ButtonSize /></div>
@@ -146,28 +144,17 @@ export default defineComponent({
  ```vue
 <template>
   <div class="simple-box">
-    <y-button type="primary" size="small">small</y-button>
-    <y-button type="primary" size="normal">normal</y-button>
-    <y-button type="primary" size="large">large</y-button>
-  </div>
-  <div class="simple-box">
-    <y-button type="primary" :icon="AddIcon" size="small">small</y-button>
-    <y-button type="primary" :icon="AddIcon" size="normal">normal</y-button>
-    <y-button type="primary" :icon="AddIcon" size="large">large</y-button>
+    <y-button type="primary" size="small">小尺寸</y-button>
+    <y-button type="primary" size="normal">正常尺寸</y-button>
+    <y-button type="primary" size="large">大尺寸</y-button>
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import AddIcon from "./add.svg";
 
 export default defineComponent({
   name: "Size",
-  setup() {
-    return {
-      AddIcon,
-    };
-  },
 });
 </script>
 
@@ -177,7 +164,7 @@ export default defineComponent({
 
 
 
-## Icon
+## 图标按钮
 
 <code-wrapper>
 <div class="code-source"><ButtonIcon /></div>
@@ -215,10 +202,7 @@ export default defineComponent({
 
 <style lang="scss">
 .button-pages {
-  .yoga-button {
-    margin-top: 12px;
-    margin-right: 12px;
-  }
+
   .btn-wrap {
     display: inline-block;
     background: rgba(0, 0, 0, 0.5);
@@ -250,7 +234,7 @@ export default {
 
 ## API
 
-### Button props
+**Button props**
 
 | Property    | Description                                        | Type    | Accepted Values                          | Default  |
 | :---------- | :------------------------------------------------- | :------ | :--------------------------------------- | :------- |
@@ -270,7 +254,7 @@ export default {
 | href        | render button as the HTMLElement a label           | String  | -                                        | -        |
 | target      | only works href support, the attr of HTMLElement a | String  | -                                        | -        |
 
-### Button events
+**Button events**
 
 | Event | Description               | Parameters   |
 | :---- | :------------------------ | :----------- |

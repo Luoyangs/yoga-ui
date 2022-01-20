@@ -156,6 +156,34 @@
   background-color: #fff;
 }
 
+h1 {
+  margin-top: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.yoga-button + .yoga-button {
+  margin-left: 12px;
+}
+
+.theme blockquote {
+  position: relative;
+  padding-bottom: 12px;
+  padding-left: 0;
+  margin-top: 24px;
+  color: inherit;
+  border-left-color: transparent;
+}
+.theme blockquote::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  content: '';
+  background-color: #ee4d2d;
+}
+
 @media (min-width: 960px) {
   .sidebar {
     width: 16rem !important;

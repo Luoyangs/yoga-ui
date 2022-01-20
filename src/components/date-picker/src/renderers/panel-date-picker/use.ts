@@ -1,5 +1,5 @@
 import { reactive, computed, unref, watch, onMounted } from 'vue';
-import { UPDATE_MODEL_EVENT } from '@base';
+import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@base';
 import { isValidDate } from '@utils/helper';
 import { getLastMonth, getNextMonth, getYearRange } from '@components/date-picker/src/utils';
 import type { SetupContext } from 'vue';
@@ -254,14 +254,14 @@ export const useHook = (props: DatePickerPanelProps, { emit }: SetupContext): IH
 
     if (props.type !== 'week') {
       if ((date as Date).getTime() !== new Date(props.modelValue as Date).getTime()) {
-        emit('change', date);
+        emit(CHANGE_EVENT, date);
       }
     } else {
       // 当startDate, endDate发生变化的时候，触发change
       const { startDate: start, endDate: end } = date as IDateRange;
       const { startDate, endDate } = props.modelValue as IDateRange;
       if (!(startDate && endDate && startDate.getTime() === start.getTime() && endDate.getTime() === end.getTime())) {
-        emit('change', date);
+        emit(CHANGE_EVENT, date);
       }
     }
   };

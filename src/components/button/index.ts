@@ -1,4 +1,4 @@
-import Button from "./src/button";
-import "./styles/button.scss";
+import Button from './src/button';
+import './styles/button.scss';
 
 export { Button };

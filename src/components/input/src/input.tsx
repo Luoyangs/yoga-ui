@@ -1,17 +1,20 @@
-import { h, defineComponent, SetupContext, nextTick, reactive, getCurrentInstance, onMounted, watch } from "vue";
+import { h, defineComponent, nextTick, reactive, getCurrentInstance, onMounted, watch } from 'vue';
+import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@base';
 import ClearIcon from '@base/icons/Clear';
-import { Icon } from "@components/icon";
+import { Icon } from '@components/icon';
 import { useComputedState } from '@components/input/src/use-input';
 import { sliceStr, calcTextareaHeight, valueToFixed } from '@components/input/src/util';
-import { AutoSize, inputProps, InputProps, InputState, RESTRICTION_TYPE, TEXTAREA_MIN_ROW } from "@components/input/types";
-import { isRegExp } from "@utils/helper";
+import { inputProps, RESTRICTION_TYPE, TEXTAREA_MIN_ROW } from '@components/input/types';
+import { isFunction, isRegExp, isNumber as isNumberFn, isBool } from '@utils/helper';
+import type { SetupContext } from 'vue';
+import type { AutoSize, InputProps, InputState } from '@components/input/types';
 
 export default defineComponent({
-  name: "YInput",
+  name: 'YInput',
   props: inputProps,
-  emits: ["update:modelValue", "change", 'clear', 'click'],
+  emits: [UPDATE_MODEL_EVENT, CHANGE_EVENT, 'clear', 'click'],
   components: {
-    Icon
+    Icon,
   },
   setup(props: InputProps, { slots, emit }: SetupContext) {
     const { proxy } = getCurrentInstance();
@@ -37,9 +40,12 @@ export default defineComponent({
       resizeTextarea();
     });
 
-    watch(() => props.modelValue, (val) => {
-      setCurrentValue(val, 'input', true);
-    });
+    watch(
+      () => props.modelValue,
+      (val) => {
+        setCurrentValue(val, 'input', true);
+      }
+    );
 
     const resizeTextarea = () => {
       // 仅对textarea生效
@@ -56,7 +62,7 @@ export default defineComponent({
       }
 
       state.textareaCalcStyle = calcTextareaHeight(
-        (proxy.$refs?.inputRef as HTMLTextAreaElement),
+        proxy.$refs?.inputRef as HTMLTextAreaElement,
         minRows,
         maxRows
       ) as Record<string, string>;
@@ -75,9 +81,7 @@ export default defineComponent({
         }
       }
 
-      return props.isRound
-        ? Number(newValue).toFixed(props.precision)
-        : valueToFixed(newValue, props.precision);
+      return props.isRound ? Number(newValue).toFixed(props.precision) : valueToFixed(newValue, props.precision);
     };
 
     const setCurrentValue = (value: string | number, trigger: string = 'input', forceValidate = false) => {
@@ -87,16 +91,14 @@ export default defineComponent({
         (proxy.$refs?.inputRef as HTMLInputElement).value = newValue;
       }
 
-      const formatValue = !state.focused && isNumber.value
-        ? getNumberValue(newValue, forceValidate)
-        : newValue;
+      const formatValue = !state.focused && isNumber.value ? getNumberValue(newValue, forceValidate) : newValue;
       state.currentValue = formatValue;
 
       if (formatValue !== props.modelValue) {
         if ((trigger === 'input' && !props.lazy) || (trigger === 'change' && props.lazy)) {
-          if ((!state.focused && isNumber.value || !isNumber.value) && String(props.modelValue) !== formatValue) {
+          if (((!state.focused && isNumber.value) || !isNumber.value) && String(props.modelValue) !== formatValue) {
             newValue = forceValidate ? formatValue : newValue;
-            emit('update:modelValue', newValue);
+            emit(UPDATE_MODEL_EVENT, newValue);
           }
 
           // form validate
@@ -110,23 +112,22 @@ export default defineComponent({
 
     const restrictionValidate = (value: string | number) => {
       const restriction = computedRestriction.value;
-      if (typeof restriction === 'function') {
+      if (isFunction(restriction)) {
         return restriction.call(null, value);
       } else if (isRegExp(restriction as string)) {
         return (restriction as RegExp).test(value as string);
-      } else {
-        if (restriction === 'number') {
-          return /^\d*$/.test(value as string);
-        }
-
-        return true;
       }
+      if (isNumberFn(restriction)) {
+        return /^\d*$/.test(value as string);
+      }
+
+      return true;
     };
 
     const beforeClearValidate = () => {
-      if (typeof props.beforeClear === 'function') {
+      if (isFunction(props.beforeClear)) {
         return props.beforeClear.call(null);
-      } else if (typeof props.beforeClear === 'boolean') {
+      } else if (isBool(props.beforeClear)) {
         return props.beforeClear;
       }
 
@@ -156,7 +157,7 @@ export default defineComponent({
       if (computedRestriction) {
         const isRestrictInput = computedRestrictionType.value === RESTRICTION_TYPE.INPUT;
         const value = isRestrictInput ? event.data : (event.target as HTMLInputElement).value;
-        if ((!isRestrictInput || value) && (!restrictionValidate(value))) {
+        if ((!isRestrictInput || value) && !restrictionValidate(value)) {
           // reset input value
           (proxy.$refs?.inputRef as HTMLInputElement).value = state.currentValue as string;
           return;
@@ -208,16 +209,16 @@ export default defineComponent({
       const prefixClass = 'yoga-input__prefix';
 
       if (hasPrefix) {
-        if (!!prefixSlot) {
+        if (prefixSlot) {
           return <div class={prefixClass}>{prefixSlot()}</div>;
-        } else if (!!prefixLabel) {
+        } else if (prefixLabel) {
           return (
             <div class={prefixClass}>
               {prefixLabel}
               {renderInputSplit('prefix')}
             </div>
           );
-        } else if (!!prefixIcon) {
+        } else if (prefixIcon) {
           return (
             <div class={prefixClass}>
               <Icon src={prefixIcon} />
@@ -242,24 +243,33 @@ export default defineComponent({
       }
 
       if (!props.disabled && props.clearable) {
-        suffixChildren.push(<span class="yoga-input__clear-btn" onClick={clear}><ClearIcon /></span>)
+        suffixChildren.push(
+          <span class="yoga-input__clear-btn" onClick={clear}>
+            <ClearIcon />
+          </span>
+        );
       }
       if (suffixLabel) {
-        suffixChildren.push(<span>{renderInputSplit('prefix')}{suffixLabel}</span>)
+        suffixChildren.push(
+          <span>
+            {renderInputSplit('prefix')}
+            {suffixLabel}
+          </span>
+        );
       } else if (isWordLimitVisible.value) {
-        suffixChildren.push(<span class="yoga-input__count">{ textLength.value }/{ props.maxlength }</span>)
+        suffixChildren.push(
+          <span class="yoga-input__count">
+            {textLength.value}/{props.maxlength}
+          </span>
+        );
       }
-      if (!!suffixIcon) {
+      if (suffixIcon) {
         suffixChildren.push(<Icon class="yoga-input__suffix-icon" src={suffixIcon} />);
       }
-      if (!!suffixSlot) {
+      if (suffixSlot) {
         suffixChildren.push(<span>{suffixSlot()}</span>);
       }
-      return (
-        <div class={suffixClass}>
-          {...suffixChildren}
-        </div>
-      );
+      return <div class={suffixClass}>{...suffixChildren}</div>;
     };
 
     const renderInputError = (): JSX.Element => {
@@ -303,7 +313,8 @@ export default defineComponent({
               onBlur={handleBlur}
               onCompositionend={handleInput}
               onInput={handleInput}
-              onChange={handleChange} />
+              onChange={handleChange}
+            />
             {renderInputSuffix()}
           </div>
           {renderInputError()}
@@ -315,7 +326,11 @@ export default defineComponent({
     const renderTextareaSuffix = (): JSX.Element[] => {
       const suffix: JSX.Element[] = [];
       if (isWordLimitVisible.value) {
-        suffix.push(<span class="yoga-input__count">{ textLength.value }/{ props.maxlength }</span>);
+        suffix.push(
+          <span class="yoga-input__count">
+            {textLength.value}/{props.maxlength}
+          </span>
+        );
       }
       const error = renderInputError();
       const help = renderInputHelp();
@@ -335,10 +350,11 @@ export default defineComponent({
             value={state.currentValue}
             onFocus={handleFocus}
             onBlur={handleBlur}
-            onInput={handleInput} />
+            onInput={handleInput}
+          />
           {...renderTextareaSuffix()}
         </div>
-      )
+      );
     };
 
     return {
@@ -346,11 +362,9 @@ export default defineComponent({
       blur,
       renderInput,
       renderTextareaInput,
-    }
+    };
   },
   render() {
-    return this.type === 'textarea'
-      ? this.renderTextareaInput()
-      : this.renderInput();
-  }
+    return this.type === 'textarea' ? this.renderTextareaInput() : this.renderInput();
+  },
 });

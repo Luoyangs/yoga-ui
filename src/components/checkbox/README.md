@@ -1,6 +1,6 @@
 ## API
 
-### Checkbox props
+**Checkbox props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | modelValue | the v-model bind value of checkbox | String, Number, Boolean | - | null |
@@ -9,13 +9,13 @@
 | disabled | whether the checkbox is disabled | Boolean | - | `false` |
 | indeterminate | same as indeterminate in native checkbox | Boolean | - | `false` |
 
-### Checkbox events
+**Checkbox events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | change | trigger when the value change | the value |
 | update:modelValue | trigger when the value change | the value |
 
-### CheckboxGroup props
+**CheckboxGroup props**
 | Property | Description | Type | Accepted Values | Default |
 |:--|:--|:--|:--|:--|
 | modelValue | the v-model bind value of checkbox group| Array | - | [] |
@@ -25,7 +25,7 @@
 | disabled | whether the checkbox group is disabled | Boolean | - | `false` |
 | fixed-width | fix checkbox item label width | Number | - | - |
 
-### CheckboxGroup events
+**CheckboxGroup events**
 | Event | Description | Parameters |
 |:--|:--|:--|
 | change | trigger when the value change | the value |

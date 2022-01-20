@@ -1,7 +1,10 @@
 import { computed, inject, toRefs } from 'vue';
-import { FormItemContext, FormItemKey } from '@components/form/types';
-import { InputProps, InputState, InputComputedState, RESTRICTION_TYPE } from '@components/input/types';
+import { FormItemKey } from '@components/form/types';
+import { RESTRICTION_TYPE } from '@components/input/types';
+import { isPlainObject } from '@utils/helper';
 import { lengthOf } from '@components/input/src/util';
+import type { FormItemContext } from '@components/form/types';
+import type { InputProps, InputState, InputComputedState } from '@components/input/types';
 
 export const useComputedState = (props: InputProps, state: InputState): InputComputedState => {
   const formItem = inject(FormItemKey, {} as FormItemContext);
@@ -82,7 +85,7 @@ export const useComputedState = (props: InputProps, state: InputState): InputCom
       if (Object.prototype.hasOwnProperty.call(props, key)) {
         if (removeProps.indexOf(key) === -1) {
           const value = props[key];
-          propMaps[key] = typeof value === 'object' ? Object.assign({}, value) : value;
+          propMaps[key] = isPlainObject(value) ? Object.assign({}, value) : value;
         }
       }
     }
