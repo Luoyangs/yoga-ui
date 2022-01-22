@@ -217,7 +217,7 @@ export const useHook = (props: DaterangePickerPanelProp, context: SetupContext<E
       }
 
       // 先选了end year还未选择start year, 则左侧可选year最大等于右侧year
-      return selection.endDate && !selection.startDate
+      return selection.endDate
         ? {
             year: selection.endDate.getFullYear(),
             month: 0,
@@ -252,12 +252,12 @@ export const useHook = (props: DaterangePickerPanelProp, context: SetupContext<E
         };
       }
 
-      if (startDate) {
-        return {
-          year: startDate.getFullYear(),
-          month: startDate.getMonth(),
-        };
-      }
+      return startDate
+        ? {
+            year: startDate.getFullYear(),
+            month: startDate.getMonth(),
+          }
+        : null;
     }
 
     const nextLeftMonth = getNextMonth(state.left.year, state.left.month);
@@ -442,8 +442,6 @@ export const useHook = (props: DaterangePickerPanelProp, context: SetupContext<E
 
   //////////////////////////////// methods start ///////////////////////////
   const prev = (panel: 'left' | 'right', type: 'month' | 'year') => {
-    console.log('pre', panel, type, state[panel].viewType);
-
     switch (state[panel].viewType) {
       case 'month':
         state[panel].year -= 1;
@@ -466,7 +464,6 @@ export const useHook = (props: DaterangePickerPanelProp, context: SetupContext<E
         }
         break;
     }
-    console.log('state[panel]', state[panel]);
   };
   const next = (panel: 'left' | 'right', type: 'month' | 'year') => {
     switch (state[panel].viewType) {
@@ -551,7 +548,7 @@ export const useHook = (props: DaterangePickerPanelProp, context: SetupContext<E
     }
 
     if (type === 'monthrange' && !state.selection.startDate && !state.selection.endDate) {
-      state.right.year = leftYear + 1;
+      state.right.year = leftYear;
       state.right.month = 0;
     }
   };
@@ -587,7 +584,7 @@ export const useHook = (props: DaterangePickerPanelProp, context: SetupContext<E
 
     // 如果传入的value和当前选择的时间不一样，则触发change事件
     const { startDate, endDate } = selection;
-    const { startDate: oldStartDate, endDate: oldEndDate } = props.modelValue;
+    const { startDate: oldStartDate, endDate: oldEndDate } = props.modelValue || {};
     if (
       !(
         oldStartDate &&

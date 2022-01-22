@@ -74,7 +74,7 @@ export default defineComponent({
 
 
 
-## 其他选择器
+## 分类
 
 <code-wrapper>
 <div class="code-source"><DatePickerType /></div>
