@@ -3,7 +3,7 @@ module.exports.demoIndex = {
   path: 'src/components/{{component}}/demo/index.md',
   temp: `# {{COMPONENT}}
 
-<!-- base -->
+<!-- base(基础) -->
 `};
 
 // src/components/xxx/demo/base.vue
@@ -14,10 +14,10 @@ module.exports.demoBase = {
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "Base",
+  name: 'Base',
 });
 </script>
 `};
@@ -31,7 +31,7 @@ module.exports.demoDoc = {
 // src/components/xx/types.ts
 module.exports.componentType = {
   path: 'src/components/{{component}}/types.ts',
-  temp: `import { ExtractPropTypes } from "vue";
+  temp: `import { ExtractPropTypes } from 'vue';
 
 export const {{CAMEL_CASE_COMPONENT}}Props = {
 
@@ -49,11 +49,12 @@ module.exports.componentStyle = {
 // src/components/xx/src/xxx.tsx
 module.exports.componentSrc = {
   path: 'src/components/{{component}}/src/{{component}}.tsx',
-  temp: `import { h, defineComponent, PropType, SetupContext } from "vue";
-import { {{CAMEL_CASE_COMPONENT}}Props, {{COMPONENT}}Props } from "../types";
+  temp: `import { h, defineComponent, PropType, SetupContext } from 'vue';
+import { {{CAMEL_CASE_COMPONENT}}Props } from '../types';
+import type { {{COMPONENT}}Props } from '../types';
 
 export default defineComponent({
-  name: "Y{{COMPONENT}}",
+  name: 'Y{{COMPONENT}}',
   props: {{CAMEL_CASE_COMPONENT}}Props,
   setup(props: {{COMPONENT}}Props, { slots }: SetupContext) {
 
@@ -67,8 +68,8 @@ export default defineComponent({
 // src/components/xx/index.ts
 module.exports.componentIndex = {
   path: 'src/components/{{component}}/index.ts',
-  temp: `import {{COMPONENT}} from "./src/{{component}}";
-import "./styles/{{component}}.scss";
+  temp: `import {{COMPONENT}} from './src/{{component}}';
+import './styles/{{component}}.scss';
 
 export { {{COMPONENT}} };
 `};
@@ -78,14 +79,14 @@ module.exports.componentReadme = {
   path: 'src/components/{{component}}/README.md',
   temp: `## API
 
-### {{COMPONENT}} props
+**{{COMPONENT}} props**
 `};
 
 // src/components/index.ts
 module.exports.component = {
   path: 'src/components/index.ts',
   event: 'update',
-  temp: 'export * from "./{{component}}";'
+  temp: `export * from './{{component}}';`
 };
 
 // src/index.ts

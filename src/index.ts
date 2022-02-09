@@ -18,5 +18,6 @@ export {
   DatePicker,
   DatePickerPanel,
   DaterangePickerPanel,
+  Scrollbar,
 // {{COMPONENT}}
 } from './components';
