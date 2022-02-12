@@ -23,9 +23,9 @@ interface IPopupManager {
   nextZIndex: () => number;
   register: (id: string, instance: Instance) => void;
   deregister: (id: string) => void;
-  doOnModalClick: () => void;
-  openModal: (id: string, zIndex: number, dom: HTMLElement, modalClass: string, modalFade: boolean) => void;
-  closeModal: (id: string) => void;
+  doOnModalClick?: () => void;
+  openModal?: (id: string, zIndex: number, dom: HTMLElement, modalClass: string, modalFade: boolean) => void;
+  closeModal?: (id: string) => void;
 }
 
 let zIndex: number;

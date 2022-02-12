@@ -1,38 +1,12 @@
 import { h, defineComponent, computed } from 'vue';
-import { UISize } from '@base';
 import { Icon } from '@components/icon';
-import type { PropType, SetupContext } from 'vue';
-import type { ButtonNativeType, ButtonProps, ButtonType } from '@components/button/types';
+import { buttonProps } from '@components/button/types';
+import type { SetupContext } from 'vue';
+import type { ButtonProps } from '@components/button/types';
 
 export default defineComponent({
   name: 'YButton',
-  props: {
-    type: String as PropType<ButtonType>,
-    size: {
-      type: String as PropType<UISize>,
-      default: 'normal',
-      validator: (value: string = 'normal') => ['large', 'normal', 'small'].indexOf(value) >= 0,
-    },
-    outline: Boolean,
-    disabled: Boolean,
-    dashed: Boolean,
-    fullWidth: Boolean,
-    round: Boolean,
-    circle: Boolean,
-    icon: String,
-    suffixIcon: String,
-    nativeType: {
-      type: String as PropType<ButtonNativeType>,
-      default: 'button',
-      validator: (value: string = 'button') => ['button', 'reset', 'submit'].indexOf(value) >= 0,
-    },
-    href: String,
-    target: {
-      type: String,
-      default: 'self',
-    },
-    onClick: Function as PropType<(e: MouseEvent) => void>,
-  },
+  props: buttonProps,
   components: {
     Icon,
   },
@@ -46,6 +20,7 @@ export default defineComponent({
 
       props.onClick?.(event);
     };
+    const tagName = computed(() => (props.href ? 'a' : 'button'));
     const propsData = computed(() => {
       const type = props.type;
       const size = props.size;
@@ -71,18 +46,11 @@ export default defineComponent({
         : { class: buttonClass, type: props.nativeType, disabled, onClick };
     });
 
-    return {
-      propsData,
-    };
-  },
-  render() {
-    const { $slots, href, propsData, icon, suffixIcon } = this;
-    const tagName = href ? 'a' : 'button';
-
-    return h(tagName, propsData, [
-      icon ? h(Icon, { src: icon }) : null,
-      $slots.default ? h('span', {}, $slots.default()) : null,
-      suffixIcon ? h(Icon, { src: suffixIcon }) : null,
-    ]);
+    return () =>
+      h(tagName.value, propsData.value, [
+        props.icon ? h(Icon, { src: props.icon }) : null,
+        slots.default ? h('span', {}, slots.default()) : null,
+        props.suffixIcon ? h(Icon, { src: props.suffixIcon }) : null,
+      ]);
   },
 });

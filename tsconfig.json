@@ -12,6 +12,7 @@
     "declaration": true,
     "declarationDir": "types",
     "baseUrl": ".",
+    "rootDir": ".",
     "paths": {
       "@components/*": ["src/components/*"],
       "@directives/*": ["src/directives/*"],

@@ -1,4 +1,5 @@
-import Icon from './src/icon';
+import Icon from '@components/icon/src/icon';
+import type { IconProps } from '@components/icon/types';
 import '../icon/styles/icon.scss';
 
-export { Icon };
+export { Icon, IconProps };

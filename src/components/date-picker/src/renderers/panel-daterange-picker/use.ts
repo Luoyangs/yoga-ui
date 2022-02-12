@@ -419,7 +419,7 @@ export const useHook = (props: DaterangePickerPanelProp, context: SetupContext<E
         // 如果没有选择开始时间或者结束时间，则不允许点击confirm
         disabled: !state.selection.startDate || !state.selection.endDate,
         onClick: onConfirm,
-      } as ButtonProps)
+      } as Partial<ButtonProps>)
   );
   /**
    * 是否展示date table

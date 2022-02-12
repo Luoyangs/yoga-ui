@@ -1,4 +1,5 @@
-import Button from './src/button';
+import Button from '@components/button/src/button';
+import { ButtonProps } from '@components/button/types';
 import './styles/button.scss';
 
-export { Button };
+export { Button, ButtonProps };

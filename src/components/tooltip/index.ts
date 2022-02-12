@@ -1,4 +1,5 @@
-import Tooltip from './src/tooltip';
+import Tooltip from '@components/tooltip/src/tooltip';
+import type { TooltipProps } from '@components/tooltip/types';
 import './styles/tooltip.scss';
 
-export { Tooltip };
+export { Tooltip, TooltipProps };

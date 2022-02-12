@@ -1,4 +1,4 @@
-export interface SvgIconProps {
+export interface IconProps {
   src: string;
   width?: number;
   height?: number;
