@@ -13,9 +13,13 @@ export const scrollbarProps = {
     type: Boolean,
     default: false,
   },
+  noresize: {
+    type: Boolean,
+    default: false,
+  },
   layout: {
     type: String as PropType<'vertical' | 'horizontal' | 'vertical,horizontal'>,
-    default: '',
+    default: 'vertical,horizontal',
     validator(value = 'vertical,horizontal') {
       return ['vertical', 'horizontal', 'vertical,horizontal'].indexOf(value) >= 0;
     },
@@ -24,11 +28,7 @@ export const scrollbarProps = {
 
 export type ScrollbarProps = ExtractPropTypes<typeof scrollbarProps>;
 export interface ScrollbarState {
-  offsetX: number;
-  offsetY: number;
   heightSize: number;
   widthSize: number;
-  lastScrollTime: number;
-  lastScrollTop: number;
-  lastScrollLeft: number;
 }
+export type EmitType = 'scroll';

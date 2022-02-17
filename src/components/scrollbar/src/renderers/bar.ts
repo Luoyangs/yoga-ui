@@ -1,23 +1,25 @@
 import { h, defineComponent, inject, computed, ref, reactive, unref } from 'vue';
+import useThumb from '@components/scrollbar/src/composition/useThumb';
 import { SCROLLBAR_KEY } from '@components/scrollbar/types';
 import { barProps } from '@components/scrollbar/src/renderers/types';
-import type { BarProps, BarState } from '@components/scrollbar/src/renderers/types';
 import { debounce } from '@utils/helper';
+import type { Ref, SetupContext } from 'vue';
+import type { BarProps, BarState } from '@components/scrollbar/src/renderers/types';
 
 export default defineComponent({
   name: 'Bar',
   props: barProps,
-  setup(props: BarProps) {
-    const scrollbar: HTMLElement = inject(SCROLLBAR_KEY);
+  setup(props: BarProps, { expose }: SetupContext) {
+    const scrollbar: Ref<HTMLElement> = inject(SCROLLBAR_KEY);
     if (!scrollbar) {
       throw new Error('can not inject scrollbar context');
     }
 
     const debounceFn = debounce((n) => n(), 500);
     const root = ref<HTMLElement>(null);
+    const { clickOffset, updateThumbClickOffset } = useThumb();
     const state = reactive<BarState>({
       isThumbDrag: false,
-      clickOffset: 0,
       visible: false,
     });
 
@@ -34,6 +36,7 @@ export default defineComponent({
     );
     const rootProps = computed(() => {
       return {
+        ref: root,
         class: ['yoga-scrollbar__bar', props.vertical ? 'vertical' : 'horizontal'],
         onMouseover: show,
         onMouseleave: hide,
@@ -49,33 +52,37 @@ export default defineComponent({
 
     const show = () => {
       state.visible = true;
-      debounceFn(() => (state.visible = true));
     };
+
     const hide = () => {
       debounceFn(() => (state.visible = false));
     };
+
     const onThumbMove = (e: MouseEvent) => {
       if (!state.isThumbDrag) {
         return;
       }
 
-      const clickOffset = state.clickOffset;
       const rootRect = root.value?.getBoundingClientRect?.();
       if (props.vertical) {
         const offset = e.clientY - rootRect.top;
-        scrollbar.scrollTop = ((offset - clickOffset) * scrollbar.scrollHeight) / scrollbar.clientHeight;
+        scrollbar.value.scrollTop =
+          (offset - clickOffset.value) * (scrollbar.value.scrollHeight / scrollbar.value.clientHeight);
       } else {
         const offset = e.screenX - rootRect.left;
-        scrollbar.scrollLeft = ((offset - clickOffset) * scrollbar.scrollWidth) / scrollbar.clientWidth;
+        scrollbar.value.scrollLeft =
+          (offset - clickOffset.value) * (scrollbar.value.scrollWidth / scrollbar.value.clientWidth);
       }
     };
+
     const onThumbMouseUp = () => {
       state.isThumbDrag = false;
-      state.clickOffset = 0;
+      clickOffset.value = 0;
       document.removeEventListener('mousemove', onThumbMove);
       document.removeEventListener('mouseup', onThumbMouseUp);
       document.onselectstart = null;
     };
+
     const onThumbMousedown = (e: MouseEvent) => {
       // 阻止冒泡和同类型的事件
       e.stopImmediatePropagation();
@@ -84,13 +91,13 @@ export default defineComponent({
       document.addEventListener('mouseup', onThumbMouseUp);
       document.onselectstart = () => false;
 
-      const rootRect = root.value?.getBoundingClientRect?.();
-      if (props.vertical) {
-        state.clickOffset = e.clientY - rootRect.top;
-      } else {
-        state.clickOffset = e.clientX - rootRect.left;
-      }
+      updateThumbClickOffset(e, props.vertical, root);
     };
+
+    expose({
+      show,
+      hide,
+    });
 
     return () => h('div', unref(rootProps), [h('div', unref(thumbProps))]);
   },

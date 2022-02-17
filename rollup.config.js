@@ -1,16 +1,16 @@
-import path from "path";
-import postcss from "postcss";
-import autoprefixer from "autoprefixer";
-import scss from "rollup-plugin-scss";
-import vue from "rollup-plugin-vue";
-import url from "@rollup/plugin-url";
-import json from "@rollup/plugin-json";
-import alias from "@rollup/plugin-alias";
+import path from 'path';
+import postcss from 'postcss';
+import autoprefixer from 'autoprefixer';
+import scss from 'rollup-plugin-scss';
+import vue from 'rollup-plugin-vue';
+import url from '@rollup/plugin-url';
+import json from '@rollup/plugin-json';
+import alias from '@rollup/plugin-alias';
 // import replace from "@rollup/plugin-replace";
-import commonjs from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
-import typescript from "@rollup/plugin-typescript";
-import pkg from "./package.json";
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
+import pkg from './package.json';
 
 const banner = `/**
  * Vue 3 Component UI Library ${pkg.version}
@@ -23,7 +23,7 @@ const globals = {
 };
 
 export default {
-  input: "src/index.ts",
+  input: 'src/index.ts',
   output: [
     {
       file: pkg.main,
@@ -34,7 +34,7 @@ export default {
     },
     {
       file: pkg.module,
-      format: "es",
+      format: 'es',
       banner,
       globals,
     },
@@ -49,20 +49,24 @@ export default {
     alias({
       entries: [
         {
-          find: "@base",
-          replacement: path.resolve(projectRootDir, "src/base"),
+          find: '@base',
+          replacement: path.resolve(projectRootDir, 'src/base'),
         },
         {
-          find: "@theme",
-          replacement: path.resolve(projectRootDir, "src/theme"),
+          find: '@theme',
+          replacement: path.resolve(projectRootDir, 'src/theme'),
         },
         {
-          find: "@utils",
-          replacement: path.resolve(projectRootDir, "src/utils"),
+          find: '@utils',
+          replacement: path.resolve(projectRootDir, 'src/utils'),
         },
         {
-          find: "@components",
-          replacement: path.resolve(projectRootDir, "src/components"),
+          find: '@hooks',
+          replacement: path.resolve(projectRootDir, 'src/hooks'),
+        },
+        {
+          find: '@components',
+          replacement: path.resolve(projectRootDir, 'src/components'),
         },
       ],
     }),
@@ -72,21 +76,18 @@ export default {
     url(),
     json(),
     vue({
-      target: "browser",
+      target: 'browser',
       template: {
         isProduction: false,
       },
       preprocessStyles: false,
     }),
     scss({
-      output: "dist/yui.css",
+      output: 'dist/yui.css',
       // outputStyle: 'compressed',
       prefix: `@use "sass:math";@use "sass:map";@import "../../../theme/var.scss";`,
       processor: () => postcss([autoprefixer()]),
-      includePaths: [
-        path.join(__dirname, "../../node_modules/"),
-        "node_modules/",
-      ],
+      includePaths: [path.join(__dirname, '../../node_modules/'), 'node_modules/'],
     }),
   ],
 };

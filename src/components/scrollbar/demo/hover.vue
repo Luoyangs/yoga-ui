@@ -1,35 +1,16 @@
 <template>
   <div class="box">
-    <y-scrollbar ref="scrollbar">
-      <p
-        v-for="item in 20"
-        :key="item"
-        class="scrollbar-demo-item">
-        {{ item }}
-      </p>
+    <y-scrollbar :hover-visible="true">
+      <p v-for="item in 20" :key="item" class="scrollbar-demo-item">{{ item }}</p>
     </y-scrollbar>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Base',
-  setup() {
-    const scrollbar = ref(null);
-
-    onMounted(() => {
-      console.log('scrollbar', scrollbar.value);
-      if (scrollbar) {
-        scrollbar.value.scrollTo(100);
-      }
-    });
-
-    return {
-      scrollbar,
-    };
-  }
 });
 </script>
 

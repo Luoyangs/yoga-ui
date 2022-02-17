@@ -1,40 +1,47 @@
-import { h, defineComponent, reactive, ref, computed, unref } from 'vue';
-import type { SetupContext } from 'vue';
-import { scrollbarProps, SCROLLBAR_WIDTH, MIN_SCROLL_THUMB_WIDTH } from '../types';
-import type { ScrollbarProps, ScrollbarState } from '../types';
+import { h, defineComponent, ref, computed, provide, onMounted, onBeforeUnmount, watch } from 'vue';
+import Bar from '@components/scrollbar/src/renderers/bar';
+import useOffset from '@components/scrollbar/src/composition/useOffset';
+import useBarSize from '@components/scrollbar/src/composition/useBarSize';
+import useScrollInfo from '@components/scrollbar/src/composition/useScrollInfo';
+import { scrollbarProps, SCROLLBAR_KEY, SCROLLBAR_WIDTH } from '@components/scrollbar/types';
+import { scrollAnimation } from '@components/scrollbar/src/utils';
+import useResizeObserver from '@hooks/useResizeObserver';
+import type { SetupContext, Ref, CSSProperties } from 'vue';
+import type { ScrollbarProps, EmitType } from '@components/scrollbar/types';
 
 export default defineComponent({
   name: 'YScrollbar',
   props: scrollbarProps,
-  setup(props: ScrollbarProps, { slots }: SetupContext) {
-    const wrapper: HTMLElement = ref(null);
-    const content: HTMLElement = ref(null);
-    const state = reactive<ScrollbarState>({
-      offsetX: 0,
-      offsetY: 0,
-      heightSize: 0,
-      widthSize: 0,
-      lastScrollTime: null,
-      lastScrollTop: null,
-      lastScrollLeft: null,
-    });
+  emits: ['scroll'],
+  setup(props: ScrollbarProps, { slots, emit, expose }: SetupContext<EmitType[]>) {
+    const wrapper: Ref<HTMLElement> = ref(null);
+    const content: Ref<HTMLElement> = ref(null);
+    const verticalBar: Ref<typeof Bar> = ref(null);
+    const horizontalBar: Ref<typeof Bar> = ref(null);
+    let stopResizeObserver;
+    const { calScrollInfo } = useScrollInfo();
+    const { widthSize, heightSize, updateBarSize } = useBarSize(wrapper, props.layout);
+    const { offsetX, offsetY, updateOffset } = useOffset(wrapper, heightSize, widthSize);
+
+    const showVerticalBar = computed(() => !props.hidden && props.layout.indexOf('vertical') > -1);
+    const showHorizontalBar = computed(() => !props.hidden && props.layout.indexOf('horizontal') > -1);
 
     const fixedStyle = computed(() => {
       const styles: {
-        wrapper: CSSStyleDeclaration;
-        content: CSSStyleDeclaration;
+        wrapper: CSSProperties;
+        content: CSSProperties;
       } = {
-        wrapper: {} as CSSStyleDeclaration,
-        content: {} as CSSStyleDeclaration,
+        wrapper: {} as CSSProperties,
+        content: {} as CSSProperties,
       };
 
-      if (state.heightSize !== 0) {
+      if (heightSize.value !== 0) {
         styles.wrapper.marginRight = `-${SCROLLBAR_WIDTH}px`;
         styles.wrapper.paddingRight = `${SCROLLBAR_WIDTH}px`;
         styles.content.marginRight = `-${SCROLLBAR_WIDTH}px`;
         styles.content.paddingRight = `${SCROLLBAR_WIDTH}px`;
       }
-      if (state.widthSize !== 0) {
+      if (widthSize.value !== 0) {
         styles.wrapper.marginBottom = `-${SCROLLBAR_WIDTH}px`;
         styles.wrapper.paddingBottom = `${SCROLLBAR_WIDTH}px`;
         styles.content.marginBottom = `-${SCROLLBAR_WIDTH}px`;
@@ -44,81 +51,97 @@ export default defineComponent({
       return styles;
     });
 
-    const update = () => {
-      const wrapperEle = unref(wrapper);
-      if (!wrapperEle) {
-        return;
-      }
-
-      if (props.layout.indexOf('vertical') > -1) {
-        let clientHeight = wrapper.clientHeight;
-        let scrollHeight = wrapper.scrollHeight;
-        if (state.heightSize !== 0) {
-          clientHeight -= SCROLLBAR_WIDTH;
-          scrollHeight -= SCROLLBAR_WIDTH;
-        }
-
-        let heightSize = scrollHeight ? clientHeight * (clientHeight / scrollHeight) : 0;
-        if (heightSize <= MIN_SCROLL_THUMB_WIDTH) {
-          heightSize = MIN_SCROLL_THUMB_WIDTH;
-        }
-        if (heightSize >= clientHeight) {
-          heightSize = 0;
-        }
-
-        state.heightSize = heightSize;
-      }
-
-      if (props.layout.indexOf('horizontal') > -1) {
-        let clientWidth = wrapper.clientWidth;
-        let scrollWidth = wrapper.scrollWidth;
-        if (state.widthSize !== 0) {
-          clientWidth -= SCROLLBAR_WIDTH;
-          scrollWidth -= SCROLLBAR_WIDTH;
-        }
-
-        let widthSize = scrollWidth ? clientWidth * (clientWidth / scrollWidth) : 0;
-        if (widthSize <= MIN_SCROLL_THUMB_WIDTH) {
-          widthSize = MIN_SCROLL_THUMB_WIDTH;
-        }
-        if (widthSize >= clientWidth) {
-          widthSize = 0;
-        }
-
-        state.widthSize = widthSize;
-      }
-    };
-
-    const calScrollInfo = (e: MouseEvent) => {
-      if (e) {
-        const now = +new Date();
-        const scrollEle = e.target as HTMLElement;
-        const x = scrollEle.scrollLeft;
-        const y = scrollEle.scrollTop;
-        const dx = x - state.lastScrollLeft;
-        const dy = y - state.lastScrollTop;
-
-        let dt = now - state.lastScrollTime;
-        if (!state.lastScrollTime || dt > 1000) {
-          dt = 1000;
-        }
-        state.lastScrollTime = now;
-        state.lastScrollLeft = x;
-        state.lastScrollTop = y;
-
-        return {
-          x,
-          y,
-          vx: Number((dx / dt).toFixed(2)),
-          vy: Number((dy / dt).toFixed(2)),
-        };
-      }
-    };
-
     const onScroll = (e: MouseEvent) => {
-      const wrapperEl = wrapper;
+      emit('scroll', e, calScrollInfo(e));
+
+      updateOffset();
     };
 
-    return () => h('div', null, 'sjsjj');
+    const scrollTo = (scrollTo: number, duration: number = 200) => {
+      scrollAnimation(wrapper.value, scrollTo, duration);
+    };
+
+    expose({
+      scrollTo,
+    });
+
+    const onMouseover = (e: MouseEvent) => {
+      if (props.hoverVisible) {
+        if (wrapper.value.contains(e.target as HTMLElement)) {
+          horizontalBar.value && horizontalBar.value.show();
+          verticalBar.value && verticalBar.value.show();
+        } else {
+          horizontalBar.value && horizontalBar.value.hide();
+          verticalBar.value && verticalBar.value.hide();
+        }
+      }
+    };
+
+    provide(SCROLLBAR_KEY, wrapper);
+
+    watch(
+      () => props.noresize,
+      (val) => {
+        if (val && stopResizeObserver) {
+          stopResizeObserver();
+        } else {
+          ({ stop: stopResizeObserver } = useResizeObserver(content, updateBarSize));
+        }
+      }
+    );
+
+    onMounted(() => {
+      updateBarSize();
+      if (props.hoverVisible) {
+        document.addEventListener('mouseover', onMouseover);
+      }
+    });
+
+    onBeforeUnmount(() => {
+      document.removeEventListener('mouseover', onMouseover);
+
+      if (stopResizeObserver) {
+        stopResizeObserver();
+      }
+    });
+
+    return () => {
+      const verticalBarEl = showVerticalBar.value
+        ? h(Bar, {
+            ref: verticalBar,
+            vertical: true,
+            offset: offsetY.value,
+            size: heightSize.value,
+          })
+        : null;
+      const horizontalBarEl = showHorizontalBar.value
+        ? h(Bar, {
+            ref: horizontalBar,
+            vertical: false,
+            offset: offsetX.value,
+            size: widthSize.value,
+          })
+        : null;
+      const innerContentEl = h(
+        'div',
+        {
+          ref: content,
+          style: fixedStyle.value.content,
+          class: 'yoga-scrollbar__content',
+        },
+        slots.default?.()
+      );
+      const wrapperEl = h(
+        'div',
+        {
+          ref: wrapper,
+          style: fixedStyle.value.wrapper,
+          class: 'yoga-scrollbar__wrapper',
+          onScroll,
+        },
+        [verticalBarEl, horizontalBarEl, innerContentEl].filter(Boolean)
+      );
+      return h('div', { class: 'yoga-scrollbar' }, wrapperEl);
+    };
   },
 });

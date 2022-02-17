@@ -19,6 +19,5 @@ export type BarProps = ExtractPropTypes<typeof barProps>;
 
 export interface BarState {
   isThumbDrag: boolean;
-  clickOffset: number;
   visible: boolean;
 }
