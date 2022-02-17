@@ -42,6 +42,10 @@ const commonPlugins = [
         replacement: path.resolve(projectRootDir, 'src/utils'),
       },
       {
+        find: '@hooks',
+        replacement: path.resolve(projectRootDir, 'src/hooks'),
+      },
+      {
         find: '@components',
         replacement: path.resolve(projectRootDir, 'src/components'),
       },

@@ -17,6 +17,7 @@
       "@components/*": ["src/components/*"],
       "@directives/*": ["src/directives/*"],
       "@directives": ["src/directives"],
+      "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
       "@base/*": ["src/base/*"],
       "@base": ["src/base"],

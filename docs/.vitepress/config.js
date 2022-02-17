@@ -56,9 +56,12 @@ module.exports = {
 };
 
 function getGuideSidebar() {
-  const forms = [
+  const basic = [
     { text: "图标 Icon", link: "/components/icon" },
     { text: "按钮 Button", link: "/components/button" },
+    { text: "滚动条 Scrollbar", link: "/components/scrollbar" },
+  ];
+  const forms = [
     { text: "单选框 Radio", link: "/components/radio" },
     { text: "复选框 Checkbox", link: "/components/checkbox" },
     { text: "开关 Switch", link: "/components/switch" },
@@ -72,6 +75,10 @@ function getGuideSidebar() {
   ];
 
   return [
+    {
+      text: "基础组件 (" + basic.length + ")",
+      children: basic,
+    },
     {
       text: "表单组件 (" + forms.length + ")",
       children: forms,
