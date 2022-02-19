@@ -4,7 +4,7 @@ import useOffset from '@components/scrollbar/src/composition/useOffset';
 import useBarSize from '@components/scrollbar/src/composition/useBarSize';
 import useScrollInfo from '@components/scrollbar/src/composition/useScrollInfo';
 import { scrollbarProps, SCROLLBAR_KEY, SCROLLBAR_WIDTH } from '@components/scrollbar/types';
-import { scrollAnimation } from '@components/scrollbar/src/utils';
+import { scrollAnimation } from '@utils/dom';
 import useResizeObserver from '@hooks/useResizeObserver';
 import type { SetupContext, Ref, CSSProperties } from 'vue';
 import type { ScrollbarProps, EmitType } from '@components/scrollbar/types';
@@ -57,12 +57,17 @@ export default defineComponent({
       updateOffset();
     };
 
-    const scrollTo = (scrollTo: number, duration: number = 200) => {
-      scrollAnimation(wrapper.value, scrollTo, duration);
+    const scrollLeft = (scrollTo: number, duration: number = 200) => {
+      scrollAnimation({ el: wrapper.value, direction: 'horizontal', scrollTo, duration });
+    };
+
+    const scrollTop = (scrollTo: number, duration: number = 200) => {
+      scrollAnimation({ el: wrapper.value, direction: 'vertical', scrollTo, duration });
     };
 
     expose({
-      scrollTo,
+      scrollTop,
+      scrollLeft,
     });
 
     const onMouseover = (e: MouseEvent) => {

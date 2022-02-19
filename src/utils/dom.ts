@@ -12,19 +12,27 @@ export const on = (
 /**
  * scroll animation: ease-in-out
  * @param el 滚动的元素
+ * @param direction 滚动方向
  * @param scrollTo 将要滚动的距离
  * @param duration 时间间距
  * @returns void
  */
-export const scrollAnimation = (el: HTMLElement, scrollTo: number, duration: number): void => {
+export const scrollAnimation = (params: {
+  el: HTMLElement;
+  direction: 'vertical' | 'horizontal';
+  scrollTo: number;
+  duration: number;
+}): void => {
+  const { el, direction, scrollTo, duration } = params;
+  const scrollAttr = direction === 'horizontal' ? 'scrollLeft' : 'scrollTop';
   const minInterval = 15;
   if (duration < minInterval) {
-    el.scrollTop = scrollTo;
+    el[scrollAttr] = scrollTo;
     return;
   }
 
-  const scrollTop = el.scrollTop;
-  const scrollHeight = scrollTo - scrollTop;
+  const scrollOffset = el[scrollAttr];
+  const scrollHeight = scrollTo - scrollOffset;
   const cosParameter = scrollHeight / 2;
   const step = Math.floor(duration / minInterval);
 
@@ -35,10 +43,10 @@ export const scrollAnimation = (el: HTMLElement, scrollTo: number, duration: num
       count++;
       margin = cosParameter * (1 - Math.cos(Math.PI * (count / step)));
 
-      if (Math.abs(scrollTo - scrollTop) < Math.abs(margin)) {
-        el.scrollTop = scrollTop;
+      if (Math.abs(scrollTo - scrollOffset) < Math.abs(margin)) {
+        el[scrollAttr] = scrollOffset;
       } else {
-        el.scrollTop = screenTop + margin;
+        el[scrollAttr] = screenTop + margin;
       }
     } else {
       clearInterval(scrollInterval);

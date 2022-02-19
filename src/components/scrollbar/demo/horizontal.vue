@@ -1,14 +1,14 @@
 <template>
-  <div class="box">
-    <y-scrollbar ref="scrollbar">
+  <y-scrollbar ref="scrollbar">
+    <div class="scrollbar-flex-content">
       <p
         v-for="item in 20"
         :key="item"
         class="scrollbar-demo-item">
         {{ item }}
       </p>
-    </y-scrollbar>
-  </div>
+    </div>
+  </y-scrollbar>
 </template>
 
 <script>
@@ -22,7 +22,7 @@ export default defineComponent({
     onMounted(() => {
       console.log('scrollbar', scrollbar.value);
       if (scrollbar) {
-        scrollbar.value.scrollTop(100);
+        scrollbar.value.scrollLeft(100);
       }
     });
 
@@ -34,20 +34,19 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.box {
-  height: 400px;
-  width: 400px;
-  border: 1px solid;
+.scrollbar-flex-content {
+  display: flex;
 }
+
 .scrollbar-demo-item {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  width: 500px;
+  justify-content: center;
+  width: 100px;
   height: 50px;
   padding: 0 16px;
-  margin: 0;
+  margin: 0 16px;
   border-radius: 4px;
-  border-bottom: 1px dashed #ddd;
+  border: 1px dashed #ddd;
 }
 </style>
