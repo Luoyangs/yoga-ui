@@ -42,10 +42,4 @@ export default defineComponent({
       );
     };
   },
-  // render() {
-  //   // render里面的方法不能放在setup里面，否则即使modelValue变化了，也不会更新
-  //   const { $slots, content, tabindex, modelValue, popperProps, onUpdateVisible } = this;
-
-  //   return
-  // },
 });

@@ -1,4 +1,4 @@
-import { popperProps } from '@components/popper';
+import { popperProps } from '@components/popper/types';
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { Placement } from '@popperjs/core';
 
