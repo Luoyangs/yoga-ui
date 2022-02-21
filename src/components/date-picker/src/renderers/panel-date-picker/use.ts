@@ -271,7 +271,6 @@ export const useHook = (props: DatePickerPanelProps, { emit }: SetupContext): IH
     let value = props.modelValue;
     let selection;
     let date: Date;
-
     if (type === 'week') {
       value = (value || {}) as IDateRange;
       selection = {
@@ -283,7 +282,7 @@ export const useHook = (props: DatePickerPanelProps, { emit }: SetupContext): IH
     } else {
       selection = {
         type: 'date',
-        date: value ? new Date(value as Date) : value,
+        date: isValidDate(value as Date) ? new Date(value as Date) : undefined,
       };
       date = selection.date || new Date();
     }

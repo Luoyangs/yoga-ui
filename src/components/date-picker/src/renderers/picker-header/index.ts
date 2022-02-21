@@ -1,14 +1,12 @@
-import { h, defineComponent, SetupContext } from 'vue';
-import {
-  EmitType,
-  pickerHeaderProps,
-  PickerHeaderProps,
-} from '@components/date-picker/src/renderers/picker-header/types';
-import { FULL_MONTHS } from '@components/date-picker/src/constants';
+import { h, defineComponent } from 'vue';
+import { useLocale } from '@hooks/useLocale';
+import { pickerHeaderProps } from '@components/date-picker/src/renderers/picker-header/types';
 import ArrowLeft from '@base/icons/ArrowLeft';
 import ArrowRight from '@base/icons/ArrowRight';
 import DoubleArrowLeft from '@base/icons/DoubleArrowLeft';
 import DoubleArrowRight from '@base/icons/DoubleArrowRight';
+import type { SetupContext } from 'vue';
+import type { EmitType, PickerHeaderProps } from '@components/date-picker/src/renderers/picker-header/types';
 
 export default defineComponent({
   name: 'YDatePickerHeader',
@@ -18,6 +16,7 @@ export default defineComponent({
     const prefixCls = 'yoga-date-picker-header';
     const iconCls = `${prefixCls}__icon`;
     const labelCls = `${prefixCls}__label`;
+    const { t } = useLocale();
 
     const onPrevClick = (type: 'month' | 'year') => {
       if (props.disabled) {
@@ -72,7 +71,7 @@ export default defineComponent({
                 class: [labelCls, props.disabled ? 'disabled' : 'clickable'],
                 onClick: () => onLabelClick('month'),
               },
-              FULL_MONTHS[props.month]
+              t(`ele.datepicker.fullmonths.${props.month}`)
             )
           : null,
         viewType === 'date' || viewType === 'month'
@@ -82,7 +81,7 @@ export default defineComponent({
                 class: [labelCls, props.disabled ? 'disabled' : 'clickable'],
                 onClick: () => onLabelClick('year'),
               },
-              props.year
+              props.year + t('ele.datepicker.year')
             )
           : null,
         viewType === 'year'

@@ -1,5 +1,5 @@
 import { h } from 'vue';
-import { MONTHS } from '@components/date-picker/src/constants';
+import { useLocale } from '@hooks/useLocale';
 import { compareMonth } from '@components/date-picker/src/utils';
 import type { MonthTableProps } from '@components/date-picker/src/renderers/table-month/types';
 import type { ISelectingRange, ISelection } from '@components/date-picker/src/renderers/table-date/types';
@@ -17,6 +17,7 @@ export default function renderMonthTable(props: MonthTableProps): JSX.Element {
     onMouseLeave,
   } = props;
   const prefixCls = 'yoga-month-table';
+  const { t } = useLocale();
 
   const isDisabled = (month: number): boolean => {
     const current = {
@@ -95,7 +96,7 @@ export default function renderMonthTable(props: MonthTableProps): JSX.Element {
       return;
     }
 
-    onMouseEnter(year, month);
+    onMouseEnter?.(year, month);
   };
 
   return h('div', { class: prefixCls }, [
@@ -113,7 +114,7 @@ export default function renderMonthTable(props: MonthTableProps): JSX.Element {
               onMouseenter: () => onMonthMouseEnter(row * 3 + col),
               onMouseleave: onMouseLeave,
             },
-            MONTHS[row * 3 + col]
+            t(`ele.datepicker.months.${row * 3 + col}`)
           )
         ),
       ])

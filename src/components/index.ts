@@ -9,4 +9,5 @@ export * from './popper';
 export * from './tooltip';
 export * from './date-picker';
 export * from './scrollbar';
+export * from './config-provider';
 // {{COMPONENT}}

@@ -60,6 +60,7 @@ function getGuideSidebar() {
     { text: "图标 Icon", link: "/components/icon" },
     { text: "按钮 Button", link: "/components/button" },
     { text: "滚动条 Scrollbar", link: "/components/scrollbar" },
+    { text: "全局配置 ConfigProvider", link: "/components/config-provider" },
   ];
   const forms = [
     { text: "单选框 Radio", link: "/components/radio" },

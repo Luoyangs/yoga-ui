@@ -50,8 +50,8 @@ module.exports.componentStyle = {
 module.exports.componentSrc = {
   path: 'src/components/{{component}}/src/{{component}}.tsx',
   temp: `import { h, defineComponent, PropType, SetupContext } from 'vue';
-import { {{CAMEL_CASE_COMPONENT}}Props } from '../types';
-import type { {{COMPONENT}}Props } from '../types';
+import { {{CAMEL_CASE_COMPONENT}}Props } from '@components/{{component}}/types';
+import type { {{COMPONENT}}Props } from '@components/{{component}}/types';
 
 export default defineComponent({
   name: 'Y{{COMPONENT}}',
@@ -68,7 +68,7 @@ export default defineComponent({
 // src/components/xx/index.ts
 module.exports.componentIndex = {
   path: 'src/components/{{component}}/index.ts',
-  temp: `import {{COMPONENT}} from './src/{{component}}';
+  temp: `import {{COMPONENT}} from '@components/{{component}}/src/{{component}}';
 import './styles/{{component}}.scss';
 
 export { {{COMPONENT}} };

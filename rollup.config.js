@@ -46,6 +46,10 @@ const commonPlugins = [
         replacement: path.resolve(projectRootDir, 'src/hooks'),
       },
       {
+        find: '@locale',
+        replacement: path.resolve(projectRootDir, 'src/locale'),
+      },
+      {
         find: '@components',
         replacement: path.resolve(projectRootDir, 'src/components'),
       },

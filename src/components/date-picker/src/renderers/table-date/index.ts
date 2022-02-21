@@ -1,6 +1,5 @@
 import { h, defineComponent, computed } from 'vue';
 import { isFunction } from '@utils/helper';
-import { WEEKS } from '@components/date-picker/src/constants';
 import {
   isInRange,
   isSameDay,
@@ -18,6 +17,7 @@ import renderTable from '@components/date-picker/src/renderers/table-date/table'
 import { dateTableProps } from '@components/date-picker/src/renderers/table-date/types';
 import type { SetupContext } from 'vue';
 import type { DateCell, EmitType, DateTableProps } from '@components/date-picker/src/renderers/table-date/types';
+import { useLocale } from '@hooks/useLocale';
 
 const getDateByCalendarCell = (cell: DateCell, year: number, month: number): Date => {
   switch (cell.type) {
@@ -37,13 +37,14 @@ export default defineComponent({
   props: dateTableProps,
   emits: ['input', 'enter-table', 'leave-table', 'selecting-range-update'],
   setup(props: DateTableProps, { slots, emit }: SetupContext<EmitType[]>) {
+    const { t } = useLocale();
     // 获取星期列表
     const headers = computed(() => {
       const startOfWeek = props.startOfWeek;
       const headers: string[] = [];
 
       for (let i = 0; i < 7; i++) {
-        headers.push(WEEKS[(startOfWeek + i) % 7].charAt(0).toUpperCase());
+        headers.push(t(`ele.datepicker.weeks.${(startOfWeek + i) % 7}`));
       }
       return headers;
     });
